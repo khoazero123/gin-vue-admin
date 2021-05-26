@@ -11,31 +11,31 @@
             :on-success="uploadSuccess"
             :show-file-list="false"
           >
-            <el-button size="small" type="primary">点击上传</el-button>
-            <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
+            <el-button size="small" type="primary">Click to upload</el-button>
+            <div class="el-upload__tip" slot="tip">Only upload JPG / PNG files，Not more than 500KB</div>
           </el-upload>
         </el-col>
         <el-col :span="12">
-          带压缩的上传, (512(k)为压缩限制)
+          Uploaded with compression (512 (k) is compressed)
           <upload-image v-model="imageUrl" :fileSize="512" :maxWH="1080" />
-          已上传文件 {{ imageUrl }}
+          Upload file {{ imageUrl }}
         </el-col>
       </el-row>
 
       <el-table :data="tableData" border stripe>
-        <el-table-column label="预览" width="100">
+        <el-table-column label="Preview" width="100">
           <template slot-scope="scope">
             <CustomPic picType="file" :picSrc="scope.row.url" />
           </template>
         </el-table-column>
-        <el-table-column label="日期" prop="UpdatedAt" width="180">
+        <el-table-column label="date" prop="UpdatedAt" width="180">
           <template slot-scope="scope">
             <div>{{ scope.row.UpdatedAt | formatDate }}</div>
           </template>
         </el-table-column>
-        <el-table-column label="文件名" prop="name" width="180"></el-table-column>
-        <el-table-column label="链接" prop="url" min-width="300"></el-table-column>
-        <el-table-column label="标签" prop="tag" width="100">
+        <el-table-column label="file name" prop="name" width="180"></el-table-column>
+        <el-table-column label="link" prop="url" min-width="300"></el-table-column>
+        <el-table-column label="label" prop="tag" width="100">
           <template slot-scope="scope">
             <el-tag
               :type="scope.row.tag === 'jpg' ? 'primary' : 'success'"
@@ -43,10 +43,10 @@
             >{{ scope.row.tag }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column label="操作" width="160">
+        <el-table-column label="operating" width="160">
           <template slot-scope="scope">
-            <el-button @click="downloadFile(scope.row)" size="small" type="text">下载</el-button>
-            <el-button @click="deleteFile(scope.row)" size="small" type="text">删除</el-button>
+            <el-button @click="downloadFile(scope.row)" size="small" type="text">download</el-button>
+            <el-button @click="deleteFile(scope.row)" size="small" type="text">delete</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -104,9 +104,9 @@ export default {
   },
   methods: {
     async deleteFile(row) {
-      this.$confirm("此操作将永久文件, 是否继续?", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
+      this.$confirm("This will be permanently filed, Whether to continue?", "prompt", {
+        confirmButtonText: "determine",
+        cancelButtonText: "cancel",
         type: "warning"
       })
         .then(async () => {
@@ -114,7 +114,7 @@ export default {
           if (res.code == 0) {
             this.$message({
               type: "success",
-              message: "删除成功!"
+              message: "successfully deleted!"
             });
             if (this.tableData.length == 1 && this.page > 1 ) {
               this.page--;
@@ -125,7 +125,7 @@ export default {
         .catch(() => {
           this.$message({
             type: "info",
-            message: "已取消删除"
+            message: "Delete"
           });
         });
     },
@@ -135,11 +135,11 @@ export default {
       const isPng = file.type === "image/png";
       const isLt2M = file.size / 1024 / 1024 < 2;
       if (!isJPG && !isPng) {
-        this.$message.error("上传头像图片只能是 JPG或png 格式!");
+        this.$message.error("Upload avatar pictures can only be JPG or PNG format!");
         this.fullscreenLoading = false;
       }
       if (!isLt2M) {
-        this.$message.error("上传头像图片大小不能超过 2MB!");
+        this.$message.error("Upload avatar image size can not exceed 2MB!");
         this.fullscreenLoading = false;
       }
       return (isPng || isJPG) && isLt2M;
@@ -149,7 +149,7 @@ export default {
       if (res.code == 0) {
         this.$message({
           type: "success",
-          message: "上传成功"
+          message: "Upload success"
         });
         if (res.code == 0) {
           this.getTableData();
@@ -164,7 +164,7 @@ export default {
     uploadError() {
       this.$message({
         type: "error",
-        message: "上传失败"
+        message: "upload failed"
       });
       this.fullscreenLoading = false;
     },

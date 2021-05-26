@@ -9,7 +9,7 @@
         </div>
         <Aside class="aside" />
       </el-aside>
-      <!-- 分块滑动功能 -->
+      <!-- Slide sliding function -->
       <el-main class="main-cont main-right">
         <transition :duration="{ enter: 800, leave: 100 }" mode="out-in" name="el-fade-in-linear">
           <div
@@ -46,12 +46,12 @@
                   <el-dropdown-menu class="dropdown-group" slot="dropdown">
                     <el-dropdown-item>
                       <span>
-                        更多信息
+                        More information
                         <el-badge is-dot />
                       </span>
                     </el-dropdown-item>
-                    <el-dropdown-item @click.native="toPerson" icon="el-icon-s-custom">个人信息</el-dropdown-item>
-                    <el-dropdown-item @click.native="LoginOut" icon="el-icon-table-lamp">登 出</el-dropdown-item>
+                    <el-dropdown-item @click.native="toPerson" icon="el-icon-s-custom">Personal information</el-dropdown-item>
+                    <el-dropdown-item @click.native="LoginOut" icon="el-icon-table-lamp">Registration</el-dropdown-item>
                   </el-dropdown-menu>
                 </el-dropdown>
               </div>
@@ -59,19 +59,19 @@
 
             </el-header>
           </el-row>
-            <!-- 当前面包屑用路由自动生成可根据需求修改 -->
+            <!-- Automatic generation of automatic generation of front breadcrumbles can be modified according to requirements -->
             <!--
-            :to="{ path: item.path }" 暂时注释不用-->
+            :to="{ path: item.path }" Temporary notes-->
             <HistoryComponent />
           </div>
         </transition>
         <transition mode="out-in" name="el-fade-in-linear">
           <keep-alive>
-            <router-view v-loading="loadingFlag"  element-loading-text="正在加载中" class="admin-box" v-if="$route.meta.keepAlive && reloadFlag"></router-view>
+            <router-view v-loading="loadingFlag"  element-loading-text="Loading" class="admin-box" v-if="$route.meta.keepAlive && reloadFlag"></router-view>
           </keep-alive>
         </transition>
         <transition mode="out-in" name="el-fade-in-linear">
-          <router-view v-loading="loadingFlag"  element-loading-text="正在加载中" class="admin-box" v-if="!$route.meta.keepAlive && reloadFlag"></router-view>
+          <router-view v-loading="loadingFlag"  element-loading-text="Loading" class="admin-box" v-if="!$route.meta.keepAlive && reloadFlag"></router-view>
         </transition>
        <BottomInfo />
       </el-main>
@@ -136,7 +136,7 @@ export default {
   computed: {
     ...mapGetters('user', ['userInfo']),
     title() {
-      return this.$route.meta.title || '当前页面'
+      return this.$route.meta.title || 'The current page'
     },
     matched() {
       return this.$route.matched

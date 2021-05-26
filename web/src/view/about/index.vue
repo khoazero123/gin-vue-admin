@@ -73,7 +73,7 @@
       <el-col :span="12">
         <el-card>
           <div slot="header">
-            提交记录
+            Submit record
           </div>
           <div>
             <Timeline

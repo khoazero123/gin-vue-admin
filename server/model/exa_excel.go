@@ -1,6 +1,6 @@
 package model
 
 type ExcelInfo struct {
-	FileName string        `json:"fileName"` // 文件名
+	FileName string        `json:"fileName"` // file name
 	InfoList []SysBaseMenu `json:"infoList"`
 }

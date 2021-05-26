@@ -5,10 +5,11 @@ import (
 	"gin-vue-admin/model/response"
 	"gin-vue-admin/service"
 	"gin-vue-admin/utils"
-	"github.com/gin-gonic/gin"
-	"go.uber.org/zap"
 	"io/ioutil"
 	"strconv"
+
+	"github.com/gin-gonic/gin"
+	"go.uber.org/zap"
 )
 
 // @Tags ExaFileUploadAndDownload
@@ -27,42 +28,42 @@ func BreakpointContinue(c *gin.Context) {
 	chunkTotal, _ := strconv.Atoi(c.Request.FormValue("chunkTotal"))
 	_, FileHeader, err := c.Request.FormFile("file")
 	if err != nil {
-		global.GVA_LOG.Error("接收文件失败!", zap.Any("err", err))
-		response.FailWithMessage("接收文件失败", c)
+		global.GVA_LOG.Error("Receive file failed!", zap.Any("err", err))
+		response.FailWithMessage("Receive file failed", c)
 		return
 	}
 	f, err := FileHeader.Open()
 	if err != nil {
-		global.GVA_LOG.Error("文件读取失败!", zap.Any("err", err))
-		response.FailWithMessage("文件读取失败", c)
+		global.GVA_LOG.Error("File read failed!", zap.Any("err", err))
+		response.FailWithMessage("File read failed", c)
 		return
 	}
 	defer f.Close()
 	cen, _ := ioutil.ReadAll(f)
 	if !utils.CheckMd5(cen, chunkMd5) {
-		global.GVA_LOG.Error("检查md5失败!", zap.Any("err", err))
-		response.FailWithMessage("检查md5失败", c)
+		global.GVA_LOG.Error("Check MD5 failure!", zap.Any("err", err))
+		response.FailWithMessage("Check MD5 failure", c)
 		return
 	}
 	err, file := service.FindOrCreateFile(fileMd5, fileName, chunkTotal)
 	if err != nil {
-		global.GVA_LOG.Error("查找或创建记录失败!", zap.Any("err", err))
-		response.FailWithMessage("查找或创建记录失败", c)
+		global.GVA_LOG.Error("Find or create a record failed!", zap.Any("err", err))
+		response.FailWithMessage("Find or create a record failed", c)
 		return
 	}
 	err, pathc := utils.BreakPointContinue(cen, fileName, chunkNumber, chunkTotal, fileMd5)
 	if err != nil {
-		global.GVA_LOG.Error("断点续传失败!", zap.Any("err", err))
-		response.FailWithMessage("断点续传失败", c)
+		global.GVA_LOG.Error("Breakpoint renewal failed!", zap.Any("err", err))
+		response.FailWithMessage("Breakpoint renewal failed", c)
 		return
 	}
 
 	if err = service.CreateFileChunk(file.ID, pathc, chunkNumber); err != nil {
-		global.GVA_LOG.Error("创建文件记录失败!", zap.Any("err", err))
-		response.FailWithMessage("创建文件记录失败", c)
+		global.GVA_LOG.Error("Create file log failed!", zap.Any("err", err))
+		response.FailWithMessage("Create file log failed", c)
 		return
 	}
-	response.OkWithMessage("切片创建成功", c)
+	response.OkWithMessage("Slice creation success", c)
 }
 
 // @Tags ExaFileUploadAndDownload
@@ -79,10 +80,10 @@ func FindFile(c *gin.Context) {
 	chunkTotal, _ := strconv.Atoi(c.Query("chunkTotal"))
 	err, file := service.FindOrCreateFile(fileMd5, fileName, chunkTotal)
 	if err != nil {
-		global.GVA_LOG.Error("查找失败!", zap.Any("err", err))
-		response.FailWithMessage("查找失败", c)
+		global.GVA_LOG.Error("Find failed!", zap.Any("err", err))
+		response.FailWithMessage("Find failed", c)
 	} else {
-		response.OkWithDetailed(response.FileResponse{File: file}, "查找成功", c)
+		response.OkWithDetailed(response.FileResponse{File: file}, "Find success", c)
 	}
 }
 
@@ -99,10 +100,10 @@ func BreakpointContinueFinish(c *gin.Context) {
 	fileName := c.Query("fileName")
 	err, filePath := utils.MakeFile(fileName, fileMd5)
 	if err != nil {
-		global.GVA_LOG.Error("文件创建失败!", zap.Any("err", err))
-		response.FailWithDetailed(response.FilePathResponse{FilePath: filePath}, "文件创建失败", c)
+		global.GVA_LOG.Error("File creation failed!", zap.Any("err", err))
+		response.FailWithDetailed(response.FilePathResponse{FilePath: filePath}, "File creation failed", c)
 	} else {
-		response.OkWithDetailed(response.FilePathResponse{FilePath: filePath}, "文件创建成功", c)
+		response.OkWithDetailed(response.FilePathResponse{FilePath: filePath}, "Document creation success", c)
 	}
 }
 
@@ -121,9 +122,9 @@ func RemoveChunk(c *gin.Context) {
 	err := utils.RemoveChunk(fileMd5)
 	err = service.DeleteFileChunk(fileMd5, fileName, filePath)
 	if err != nil {
-		global.GVA_LOG.Error("缓存切片删除失败!", zap.Any("err", err))
-		response.FailWithDetailed(response.FilePathResponse{FilePath: filePath}, "缓存切片删除失败", c)
+		global.GVA_LOG.Error("Cache slice delete failed!", zap.Any("err", err))
+		response.FailWithDetailed(response.FilePathResponse{FilePath: filePath}, "Cache slice delete failed", c)
 	} else {
-		response.OkWithDetailed(response.FilePathResponse{FilePath: filePath}, "缓存切片删除成功", c)
+		response.OkWithDetailed(response.FilePathResponse{FilePath: filePath}, "Cache slice delete success", c)
 	}
 }

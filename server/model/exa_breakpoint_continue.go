@@ -4,7 +4,7 @@ import (
 	"gin-vue-admin/global"
 )
 
-// file struct, 文件结构体
+// file struct, File structure
 type ExaFile struct {
 	global.GVA_MODEL
 	FileName     string
@@ -15,7 +15,7 @@ type ExaFile struct {
 	IsFinish     bool
 }
 
-// file chunk struct, 切片结构体
+// file chunk struct, Slice structure
 type ExaFileChunk struct {
 	global.GVA_MODEL
 	ExaFileID       uint

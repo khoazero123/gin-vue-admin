@@ -1,10 +1,10 @@
 <template>
   <div>
     <div class="button-box clearflex">
-      <el-button @click="addUser" type="primary">新增用户</el-button>
+      <el-button @click="addUser" type="primary">New users</el-button>
     </div>
     <el-table :data="tableData" border stripe>
-      <el-table-column label="头像" min-width="50">
+      <el-table-column label="Avatar" min-width="50">
         <template slot-scope="scope">
           <div :style="{'textAlign':'center'}">
             <CustomPic :picSrc="scope.row.headerImg" />
@@ -12,9 +12,9 @@
         </template>
       </el-table-column>
       <el-table-column label="uuid" min-width="250" prop="uuid"></el-table-column>
-      <el-table-column label="用户名" min-width="150" prop="userName"></el-table-column>
-      <el-table-column label="昵称" min-width="150" prop="nickName"></el-table-column>
-      <el-table-column label="用户角色" min-width="150">
+      <el-table-column label="username" min-width="150" prop="userName"></el-table-column>
+      <el-table-column label="nickname" min-width="150" prop="nickName"></el-table-column>
+      <el-table-column label="User role" min-width="150">
         <template slot-scope="scope">
           <el-cascader
             @change="changeAuthority(scope.row)"
@@ -26,15 +26,15 @@
           ></el-cascader>
         </template>
       </el-table-column>
-      <el-table-column label="操作" min-width="150">
+      <el-table-column label="operating" min-width="150">
         <template slot-scope="scope">
           <el-popover placement="top" width="160" v-model="scope.row.visible">
-            <p>确定要删除此用户吗</p>
+            <p>Be sure to delete this user?</p>
             <div style="text-align: right; margin: 0">
-              <el-button size="mini" type="text" @click="scope.row.visible = false">取消</el-button>
-              <el-button type="primary" size="mini" @click="deleteUser(scope.row)">确定</el-button>
+              <el-button size="mini" type="text" @click="scope.row.visible = false">cancel</el-button>
+              <el-button type="primary" size="mini" @click="deleteUser(scope.row)">determine</el-button>
             </div>
-            <el-button type="danger" icon="el-icon-delete" size="small" slot="reference">删除</el-button>
+            <el-button type="danger" icon="el-icon-delete" size="small" slot="reference">delete</el-button>
           </el-popover>
         </template>
       </el-table-column>
@@ -50,24 +50,24 @@
       layout="total, sizes, prev, pager, next, jumper"
     ></el-pagination>
 
-    <el-dialog :visible.sync="addUserDialog" custom-class="user-dialog" title="新增用户">
+    <el-dialog :visible.sync="addUserDialog" custom-class="user-dialog" title="New users">
       <el-form :rules="rules" ref="userForm" :model="userInfo">
-        <el-form-item label="用户名" label-width="80px" prop="username">
+        <el-form-item label="username" label-width="80px" prop="username">
           <el-input v-model="userInfo.username"></el-input>
         </el-form-item>
-        <el-form-item label="密码" label-width="80px" prop="password">
+        <el-form-item label="password" label-width="80px" prop="password">
           <el-input v-model="userInfo.password"></el-input>
         </el-form-item>
-        <el-form-item label="别名" label-width="80px" prop="nickName">
+        <el-form-item label="Alias" label-width="80px" prop="nickName">
           <el-input v-model="userInfo.nickName"></el-input>
         </el-form-item>
-        <el-form-item label="头像" label-width="80px">
+        <el-form-item label="Avatar" label-width="80px">
           <div style="display:inline-block" @click="openHeaderChange">
             <img class="header-img-box" v-if="userInfo.headerImg" :src="userInfo.headerImg" />
-            <div v-else class="header-img-box">从媒体库选择</div>
+            <div v-else class="header-img-box">Select from the media library</div>
           </div>
         </el-form-item>
-        <el-form-item label="用户角色" label-width="80px" prop="authorityId">
+        <el-form-item label="User role" label-width="80px" prop="authorityId">
           <el-cascader
             v-model="userInfo.authorityId"
             :options="authOptions"
@@ -78,8 +78,8 @@
         </el-form-item>
       </el-form>
       <div class="dialog-footer" slot="footer">
-        <el-button @click="closeAddUserDialog">取 消</el-button>
-        <el-button @click="enterAddUserDialog" type="primary">确 定</el-button>
+        <el-button @click="closeAddUserDialog">Take</el-button>
+        <el-button @click="enterAddUserDialog" type="primary">Confirm</el-button>
       </div>
     </el-dialog>
     <ChooseImg ref="chooseImg" :target="userInfo" :targetKey="`headerImg`"/>
@@ -88,7 +88,7 @@
 
 
 <script>
-// 获取列表内容封装在mixins内部  getTableData方法 初始化已封装完成
+// Get list content package In Mixins internal GetTableData method initialized packaged
 const path = process.env.VUE_APP_BASE_API;
 import {
   getUserList,
@@ -120,18 +120,18 @@ export default {
       },
       rules: {
         username: [
-          { required: true, message: "请输入用户名", trigger: "blur" },
-          { min: 5, message: "最低5位字符", trigger: "blur" }
+          { required: true, message: "please enter user name", trigger: "blur" },
+          { min: 5, message: "Minimum 5 characters", trigger: "blur" }
         ],
         password: [
-          { required: true, message: "请输入用户密码", trigger: "blur" },
+          { required: true, message: "Please enter the user password", trigger: "blur" },
           { min: 6, message: "最低6位字符", trigger: "blur" }
         ],
         nickName: [
-          { required: true, message: "请输入用户昵称", trigger: "blur" }
+          { required: true, message: "Please enter the user nickname", trigger: "blur" }
         ],
         authorityId: [
-          { required: true, message: "请选择用户角色", trigger: "blur" }
+          { required: true, message: "Please select a user role", trigger: "blur" }
         ]
       }
     };

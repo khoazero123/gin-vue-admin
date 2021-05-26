@@ -164,18 +164,18 @@ var carbines = []gormadapter.CasbinRule{
 }
 
 //@author: [SliverHorn](https://github.com/SliverHorn)
-//@description: casbin_rule 表数据初始化
+//@description: casbin_rule Table data initialization
 func (c *casbin) Init() error {
 	global.GVA_DB.AutoMigrate(gormadapter.CasbinRule{})
 	return global.GVA_DB.Transaction(func(tx *gorm.DB) error {
 		if tx.Find(&[]gormadapter.CasbinRule{}).RowsAffected == 154 {
-			color.Danger.Println("\n[Mysql] --> casbin_rule 表的初始数据已存在!")
+			color.Danger.Println("\n[Mysql] --> casbin_rule The initial data of the table already exists!")
 			return nil
 		}
-		if err := tx.Create(&carbines).Error; err != nil { // 遇到错误时回滚事务
+		if err := tx.Create(&carbines).Error; err != nil { // Magnification
 			return err
 		}
-		color.Info.Println("\n[Mysql] --> casbin_rule 表初始数据成功!")
+		color.Info.Println("\n[Mysql] --> casbin_rule Table initial data success!")
 		return nil
 	})
 }

@@ -315,13 +315,13 @@ definitions:
           $ref: '#/definitions/model.Field'
         type: array
       packageName:
-        description: 文件名称
+        description: file name
         type: string
       structName:
-        description: Struct名称
+        description: Struct Name
         type: string
       tableName:
-        description: 表名
+        description: Table Name
         type: string
     type: object
   model.ExaCustomer:
@@ -630,7 +630,7 @@ definitions:
         description: 主键ID
         type: integer
       ip:
-        description: 请求ip
+        description: Request IP
         type: string
       latency:
         description: 延迟
@@ -921,13 +921,13 @@ definitions:
         description: 创建时间
         type: string
       error_message:
-        description: 错误信息
+        description: Error message
         type: string
       id:
-        description: 主键ID
+        description: Master key ID
         type: integer
       ip:
-        description: 请求ip
+        description: Request IP
         type: string
       latency:
         description: 延迟
@@ -1391,7 +1391,7 @@ paths:
           description: '{"success":true,"data":{},"msg":"登陆成功"}'
           schema:
             type: string
-      summary: 用户登录
+      summary: User login
       tags:
       - Base
   /casbin/UpdateCasbin:

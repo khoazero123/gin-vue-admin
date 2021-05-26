@@ -3,8 +3,9 @@ package source
 import (
 	"gin-vue-admin/global"
 	"gin-vue-admin/model"
-	"github.com/gookit/color"
 	"time"
+
+	"github.com/gookit/color"
 
 	"gorm.io/gorm"
 )
@@ -14,7 +15,7 @@ var DictionaryDetail = new(dictionaryDetail)
 type dictionaryDetail struct{}
 
 //@author: [SliverHorn](https://github.com/SliverHorn)
-//@description: dictionary_details 表数据初始化
+//@description: dictionary_details Table data initialization
 func (d *dictionaryDetail) Init() error {
 	var details = []model.SysDictionaryDetail{
 		{global.GVA_MODEL{ID: 1, CreatedAt: time.Now(), UpdatedAt: time.Now()}, "smallint", 1, status, 1, 2},
@@ -43,13 +44,13 @@ func (d *dictionaryDetail) Init() error {
 	}
 	return global.GVA_DB.Transaction(func(tx *gorm.DB) error {
 		if tx.Where("id IN ?", []int{1, 23}).Find(&[]model.SysDictionaryDetail{}).RowsAffected == 2 {
-			color.Danger.Println("\n[Mysql] --> sys_dictionary_details 表的初始数据已存在!")
+			color.Danger.Println("\n[Mysql] --> sys_dictionary_details The initial data of the table already exists!")
 			return nil
 		}
-		if err := tx.Create(&details).Error; err != nil { // 遇到错误时回滚事务
+		if err := tx.Create(&details).Error; err != nil { // Magnification
 			return err
 		}
-		color.Info.Println("\n[Mysql] --> sys_dictionary_details 表初始数据成功!")
+		color.Info.Println("\n[Mysql] --> sys_dictionary_details Table initial data success!")
 		return nil
 	})
 }

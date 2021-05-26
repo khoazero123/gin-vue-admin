@@ -11,42 +11,42 @@
       stripe
       style="width: 100%"
     >
-      <el-table-column label="角色id" min-width="180" prop="authorityId"></el-table-column>
-      <el-table-column label="角色名称" min-width="180" prop="authorityName"></el-table-column>
-      <el-table-column fixed="right" label="操作" width="460">
+      <el-table-column label="Role ID" min-width="180" prop="authorityId"></el-table-column>
+      <el-table-column label="Role Name" min-width="180" prop="authorityName"></el-table-column>
+      <el-table-column fixed="right" label="operating" width="460">
         <template slot-scope="scope">
-          <el-button @click="opdendrawer(scope.row)" size="small" type="primary">设置权限</el-button>
+          <el-button @click="opdendrawer(scope.row)" size="small" type="primary">Setting permissions</el-button>
           <el-button
             @click="addAuthority(scope.row.authorityId)"
             icon="el-icon-plus"
             size="small"
             type="primary"
-          >新增子角色</el-button>
+          >New kolic role</el-button>
           <el-button
             @click="copyAuthority(scope.row)"
             icon="el-icon-copy-document"
             size="small"
             type="primary"
-          >拷贝</el-button>
+          >copy</el-button>
           <el-button
             @click="editAuthority(scope.row)"
             icon="el-icon-edit"
             size="small"
             type="primary"
-          >编辑</el-button>
+          >edit</el-button>
           <el-button
             @click="deleteAuth(scope.row)"
             icon="el-icon-delete"
             size="small"
             type="danger"
-          >删除</el-button>
+          >delete</el-button>
         </template>
       </el-table-column>
     </el-table>
-    <!-- 新增角色弹窗 -->
+    <!-- New role pop-up window -->
     <el-dialog :title="dialogTitle" :visible.sync="dialogFormVisible">
       <el-form :model="form" :rules="rules" ref="authorityForm">
-        <el-form-item label="父级角色" prop="parentId">
+        <el-form-item label="Parent role" prop="parentId">
           <el-cascader
             :disabled="dialogType=='add'"
             :options="AuthorityOption"
@@ -56,28 +56,28 @@
             v-model="form.parentId"
           ></el-cascader>
         </el-form-item>
-        <el-form-item label="角色ID" prop="authorityId">
+        <el-form-item label="Role ID" prop="authorityId">
           <el-input :disabled="dialogType=='edit'" autocomplete="off" v-model="form.authorityId"></el-input>
         </el-form-item>
-        <el-form-item label="角色姓名" prop="authorityName">
+        <el-form-item label="Role name" prop="authorityName">
           <el-input autocomplete="off" v-model="form.authorityName"></el-input>
         </el-form-item>
       </el-form>
       <div class="dialog-footer" slot="footer">
-        <el-button @click="closeDialog">取 消</el-button>
-        <el-button @click="enterDialog" type="primary">确 定</el-button>
+        <el-button @click="closeDialog">Take</el-button>
+        <el-button @click="enterDialog" type="primary">Confirm</el-button>
       </div>
     </el-dialog>
 
-    <el-drawer :visible.sync="drawer" :with-header="false" size="40%" title="角色配置" v-if="drawer">
+    <el-drawer :visible.sync="drawer" :with-header="false" size="40%" title="Role configuration" v-if="drawer">
       <el-tabs :before-leave="autoEnter" class="role-box" type="border-card">
-        <el-tab-pane label="角色菜单">
+        <el-tab-pane label="Role menu">
           <Menus :row="activeRow" ref="menus" />
         </el-tab-pane>
-        <el-tab-pane label="角色api">
+        <el-tab-pane label="Role API">
           <apis :row="activeRow" ref="apis" />
         </el-tab-pane>
-        <el-tab-pane label="资源权限">
+        <el-tab-pane label="Resource permission">
           <Datas :authority="tableData" :row="activeRow" ref="datas" />
         </el-tab-pane>
       </el-tabs>
@@ -86,7 +86,7 @@
 </template>
 
 <script>
-// 获取列表内容封装在mixins内部  getTableData方法 初始化已封装完成
+// Get list content package In Mixins internal GetTableData method initialized packaged
 
 import {
   getAuthorityList,
@@ -107,7 +107,7 @@ export default {
   data() {
     var mustUint = (rule, value, callback) => {
       if (!/^[0-9]*[1-9][0-9]*$/.test(value)) {
-        return callback(new Error("请输入正整数"));
+        return callback(new Error("Please enter the integer"));
       }
       return callback();
     };
@@ -116,7 +116,7 @@ export default {
       AuthorityOption: [
         {
           authorityId: "0",
-          authorityName: "根角色"
+          authorityName: "Root role"
         }
       ],
       listApi: getAuthorityList,
@@ -124,7 +124,7 @@ export default {
       dialogType: "add",
       activeRow: {},
       activeUserId: 0,
-      dialogTitle: "新增角色",
+      dialogTitle: "New role",
       dialogFormVisible: false,
       apiDialogFlag: false,
       copyForm: {},
@@ -135,14 +135,14 @@ export default {
       },
       rules: {
         authorityId: [
-          { required: true, message: "请输入角色ID", trigger: "blur" },
+          { required: true, message: "Please enter a role ID", trigger: "blur" },
           { validator: mustUint, trigger: "blur" }
         ],
         authorityName: [
-          { required: true, message: "请输入角色名", trigger: "blur" }
+          { required: true, message: "Please enter the role name", trigger: "blur" }
         ],
         parentId: [
-          { required: true, message: "请选择请求方式", trigger: "blur" }
+          { required: true, message: "Please select a request method", trigger: "blur" }
         ]
       }
     };
@@ -162,10 +162,10 @@ export default {
         }
       }
     },
-    // 拷贝角色
+    // Copy role
     copyAuthority(row) {
       this.setOptions();
-      this.dialogTitle = "拷贝角色";
+      this.dialogTitle = "Copy role";
       this.dialogType = "copy";
       for (let k in this.form) {
         this.form[k] = row[k];
@@ -177,11 +177,11 @@ export default {
       this.drawer = true;
       this.activeRow = row;
     },
-    // 删除角色
+    // Delete role
     deleteAuth(row) {
-      this.$confirm("此操作将永久删除该角色, 是否继续?", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
+      this.$confirm("This action will be permanently deleted, do you continue?", "prompt", {
+        confirmButtonText: "determine",
+        cancelButtonText: "cancel",
         type: "warning"
       })
         .then(async () => {
@@ -189,7 +189,7 @@ export default {
           if (res.code == 0) {
             this.$message({
               type: "success",
-              message: "删除成功!"
+              message: "successfully deleted!"
             });
             if (this.tableData.length == 1 && this.page > 1 ) {
               this.page--;
@@ -200,11 +200,11 @@ export default {
         .catch(() => {
           this.$message({
             type: "info",
-            message: "已取消删除"
+            message: "Delete"
           });
         });
     },
-    // 初始化表单
+    // Initialization form
     initForm() {
       if (this.$refs.authorityForm) {
         this.$refs.authorityForm.resetFields();
@@ -215,19 +215,19 @@ export default {
         parentId: "0"
       };
     },
-    // 关闭窗口
+    // close the window
     closeDialog() {
       this.initForm();
       this.dialogFormVisible = false;
       this.apiDialogFlag = false;
     },
-    // 确定弹窗
+    // Determine pop-up window
 
     async enterDialog() {
       if (this.form.authorityId == "0") {
         this.$message({
           type: "error",
-          message: "角色id不能为0"
+          message: "Role id can't be 0"
         });
         return false;
       }
@@ -240,7 +240,7 @@ export default {
                 if (res.code == 0) {
                   this.$message({
                     type: "success",
-                    message: "添加成功!"
+                    message: "Added successfully!"
                   });
                   this.getTableData();
                   this.closeDialog();
@@ -253,7 +253,7 @@ export default {
                 if (res.code == 0) {
                   this.$message({
                     type: "success",
-                    message: "添加成功!"
+                    message: "Added successfully!"
                   });
                   this.getTableData();
                   this.closeDialog();
@@ -279,7 +279,7 @@ export default {
               if (res.code == 0) {
                 this.$message({
                   type: "success",
-                  message: "复制成功！"
+                  message: "Copy is successful!"
                 });
                 this.getTableData();
               }
@@ -295,7 +295,7 @@ export default {
       this.AuthorityOption = [
         {
           authorityId: "0",
-          authorityName: "根角色"
+          authorityName: "Root role"
         }
       ];
       this.setAuthorityOptions(this.tableData, this.AuthorityOption, false);
@@ -327,19 +327,19 @@ export default {
           }
         });
     },
-    // 增加角色
+    // Increasing role
     addAuthority(parentId) {
       this.initForm();
-      this.dialogTitle = "新增角色";
+      this.dialogTitle = "New role";
       this.dialogType = "add";
       this.form.parentId = parentId;
       this.setOptions();
       this.dialogFormVisible = true;
     },
-    // 编辑角色
+    // Edit role
     editAuthority(row) {
       this.setOptions();
-      this.dialogTitle = "编辑角色";
+      this.dialogTitle = "Edit role";
       this.dialogType = "edit";
       for (let key in this.form) {
         this.form[key] = row[key];

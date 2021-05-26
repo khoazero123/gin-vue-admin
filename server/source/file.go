@@ -3,9 +3,10 @@ package source
 import (
 	"gin-vue-admin/global"
 	"gin-vue-admin/model"
+	"time"
+
 	"github.com/gookit/color"
 	"gorm.io/gorm"
-	"time"
 )
 
 var File = new(file)
@@ -18,17 +19,17 @@ var files = []model.ExaFileUploadAndDownload{
 }
 
 //@author: [SliverHorn](https://github.com/SliverHorn)
-//@description: exa_file_upload_and_downloads 表初始化数据
+//@description: exa_file_upload_and_downloads Table initialization data
 func (f *file) Init() error {
 	return global.GVA_DB.Transaction(func(tx *gorm.DB) error {
 		if tx.Where("id IN ?", []int{1, 2}).Find(&[]model.ExaFileUploadAndDownload{}).RowsAffected == 2 {
-			color.Danger.Println("\n[Mysql] --> exa_file_upload_and_downloads 表初始数据已存在!")
+			color.Danger.Println("\n[Mysql] --> exa_file_upload_and_downloads Table initial data already exists!")
 			return nil
 		}
-		if err := tx.Create(&files).Error; err != nil { // 遇到错误时回滚事务
+		if err := tx.Create(&files).Error; err != nil { // Magnification
 			return err
 		}
-		color.Info.Println("\n[Mysql] --> exa_file_upload_and_downloads 表初始数据成功!")
+		color.Info.Println("\n[Mysql] --> exa_file_upload_and_downloads Table initial data success!")
 		return nil
 	})
 }

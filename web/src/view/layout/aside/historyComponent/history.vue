@@ -64,7 +64,7 @@ export default {
       {
         name: this.defaultRouter,
         meta: {
-          title: "首页"
+          title: "Homepage"
         },
         query: {},
         params: {}
@@ -111,7 +111,7 @@ export default {
         {
           name: this.defaultRouter,
           meta: {
-            title: "首页"
+            title: "Homepage"
           },
           query: {},
           params: {}

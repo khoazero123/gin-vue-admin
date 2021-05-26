@@ -8,6 +8,7 @@ import (
 	"gin-vue-admin/model/response"
 	"gin-vue-admin/service"
 	"gin-vue-admin/utils"
+
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 )
@@ -30,10 +31,10 @@ func CreateExaCustomer(c *gin.Context) {
 	customer.SysUserID = getUserID(c)
 	customer.SysUserAuthorityID = getUserAuthorityId(c)
 	if err := service.CreateExaCustomer(customer); err != nil {
-		global.GVA_LOG.Error("创建失败!", zap.Any("err", err))
-		response.FailWithMessage("创建失败", c)
+		global.GVA_LOG.Error("Creation failed!", zap.Any("err", err))
+		response.FailWithMessage("Creation failed", c)
 	} else {
-		response.OkWithMessage("创建成功", c)
+		response.OkWithMessage("Create success", c)
 	}
 }
 
@@ -53,10 +54,10 @@ func DeleteExaCustomer(c *gin.Context) {
 		return
 	}
 	if err := service.DeleteExaCustomer(customer); err != nil {
-		global.GVA_LOG.Error("删除失败!", zap.Any("err", err))
-		response.FailWithMessage("删除失败", c)
+		global.GVA_LOG.Error("failed to delete!", zap.Any("err", err))
+		response.FailWithMessage("failed to delete", c)
 	} else {
-		response.OkWithMessage("删除成功", c)
+		response.OkWithMessage("successfully deleted", c)
 	}
 }
 
@@ -80,10 +81,10 @@ func UpdateExaCustomer(c *gin.Context) {
 		return
 	}
 	if err := service.UpdateExaCustomer(&customer); err != nil {
-		global.GVA_LOG.Error("更新失败!", zap.Any("err", err))
-		response.FailWithMessage("更新失败!", c)
+		global.GVA_LOG.Error("Update failed!", zap.Any("err", err))
+		response.FailWithMessage("Update failed!", c)
 	} else {
-		response.OkWithMessage("更新成功", c)
+		response.OkWithMessage("update completed", c)
 	}
 }
 
@@ -104,10 +105,10 @@ func GetExaCustomer(c *gin.Context) {
 	}
 	err, data := service.GetExaCustomer(customer.ID)
 	if err != nil {
-		global.GVA_LOG.Error("获取失败!", zap.Any("err", err))
-		response.FailWithMessage("获取失败", c)
+		global.GVA_LOG.Error("Acquisition failure!", zap.Any("err", err))
+		response.FailWithMessage("Acquisition failure", c)
 	} else {
-		response.OkWithDetailed(response.ExaCustomerResponse{Customer: data}, "获取成功", c)
+		response.OkWithDetailed(response.ExaCustomerResponse{Customer: data}, "Get successful", c)
 	}
 }
 
@@ -128,14 +129,14 @@ func GetExaCustomerList(c *gin.Context) {
 	}
 	err, customerList, total := service.GetCustomerInfoList(getUserAuthorityId(c), pageInfo)
 	if err != nil {
-		global.GVA_LOG.Error("获取失败!", zap.Any("err", err))
-		response.FailWithMessage(fmt.Sprintf("获取失败：%v", err), c)
+		global.GVA_LOG.Error("Acquisition failure!", zap.Any("err", err))
+		response.FailWithMessage(fmt.Sprintf("Get failed: %v", err), c)
 	} else {
 		response.OkWithDetailed(response.PageResult{
 			List:     customerList,
 			Total:    total,
 			Page:     pageInfo.Page,
 			PageSize: pageInfo.PageSize,
-		}, "获取成功", c)
+		}, "Get successful", c)
 	}
 }

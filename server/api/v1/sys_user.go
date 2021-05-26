@@ -106,10 +106,10 @@ func tokenNext(c *gin.Context, user model.SysUser) {
 }
 
 // @Tags SysUser
-// @Summary 用户注册账号
+// @Summary User registration account
 // @Produce  application/json
-// @Param data body model.SysUser true "用户名, 昵称, 密码, 角色ID"
-// @Success 200 {string} string "{"success":true,"data":{},"msg":"注册成功"}"
+// @Param data body model.SysUser true "User name, nickname, password, role ID"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"registration success"}"
 // @Router /user/register [post]
 func Register(c *gin.Context) {
 	var R request.Register
@@ -121,19 +121,19 @@ func Register(c *gin.Context) {
 	user := &model.SysUser{Username: R.Username, NickName: R.NickName, Password: R.Password, HeaderImg: R.HeaderImg, AuthorityId: R.AuthorityId}
 	err, userReturn := service.Register(*user)
 	if err != nil {
-		global.GVA_LOG.Error("注册失败", zap.Any("err", err))
-		response.FailWithDetailed(response.SysUserResponse{User: userReturn}, "注册失败", c)
+		global.GVA_LOG.Error("registration failed", zap.Any("err", err))
+		response.FailWithDetailed(response.SysUserResponse{User: userReturn}, "registration failed", c)
 	} else {
-		response.OkWithDetailed(response.SysUserResponse{User: userReturn}, "注册成功", c)
+		response.OkWithDetailed(response.SysUserResponse{User: userReturn}, "registration success", c)
 	}
 }
 
 // @Tags SysUser
-// @Summary 用户修改密码
+// @Summary User change password
 // @Security ApiKeyAuth
 // @Produce  application/json
-// @Param data body request.ChangePasswordStruct true "用户名, 原密码, 新密码"
-// @Success 200 {string} string "{"success":true,"data":{},"msg":"修改成功"}"
+// @Param data body request.ChangePasswordStruct true "User name, original password, new password"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"Successfully modified"}"
 // @Router /user/changePassword [put]
 func ChangePassword(c *gin.Context) {
 	var user request.ChangePasswordStruct
@@ -144,10 +144,10 @@ func ChangePassword(c *gin.Context) {
 	}
 	U := &model.SysUser{Username: user.Username, Password: user.Password}
 	if err, _ := service.ChangePassword(U, user.NewPassword); err != nil {
-		global.GVA_LOG.Error("修改失败", zap.Any("err", err))
-		response.FailWithMessage("修改失败，原密码与当前账户不符", c)
+		global.GVA_LOG.Error("fail to edit", zap.Any("err", err))
+		response.FailWithMessage("Modification failed, the original password does not match the current account", c)
 	} else {
-		response.OkWithMessage("修改成功", c)
+		response.OkWithMessage("Successfully modified", c)
 	}
 }
 

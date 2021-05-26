@@ -1,17 +1,17 @@
 <template>
   <div>
-    <!-- 从数据库直接获取字段 -->
+    <!-- Get fields directly from the database -->
     <el-collapse v-model="activeNames">
       <el-collapse-item name="1">
         <template slot="title">
           <div :style="{fontSize:'16px',paddingLeft:'20px'}">
-            点这里从现有数据库创建代码
+            Click here to create code from existing database
             <i class="header-icon el-icon-thumb"></i>
           </div>
         </template>
         <el-form ref="getTableForm" :inline="true" :model="dbform" label-width="120px">
-          <el-form-item label="数据库名" prop="structName">
-            <el-select @change="getTable" v-model="dbform.dbName" filterable placeholder="请选择数据库">
+          <el-form-item label="data storage name" prop="structName">
+            <el-select @change="getTable" v-model="dbform.dbName" filterable placeholder="Please select a database">
               <el-option
                 v-for="item in dbOptions"
                 :key="item.database"
@@ -20,12 +20,12 @@
               ></el-option>
             </el-select>
           </el-form-item>
-          <el-form-item label="表名" prop="structName">
+          <el-form-item label="Table Name" prop="structName">
             <el-select
               v-model="dbform.tableName"
               :disabled="!dbform.dbName"
               filterable
-              placeholder="请选择表"
+              placeholder="Please select a table"
             >
               <el-option
                 v-for="item in tableOptions"
@@ -36,103 +36,103 @@
             </el-select>
           </el-form-item>
           <el-form-item>
-            <el-button @click="getColumn" type="primary">使用此表创建</el-button>
+            <el-button @click="getColumn" type="primary">Create this table</el-button>
           </el-form-item>
         </el-form>
       </el-collapse-item>
     </el-collapse>
 
     <el-divider></el-divider>
-    <!-- 初始版本自动化代码工具 -->
+    <!-- Initial version Automation Code Tool -->
     <el-form ref="autoCodeForm" :rules="rules" :model="form" label-width="120px" :inline="true">
-      <el-form-item label="Struct名称" prop="structName">
-        <el-input v-model="form.structName" placeholder="首字母自动转换大写"></el-input>
+      <el-form-item label="Struct Name" prop="structName">
+        <el-input v-model="form.structName" placeholder="First letter automatic conversion capital"></el-input>
       </el-form-item>
       <el-form-item label="tableName" prop="tableName">
-        <el-input v-model="form.tableName" placeholder="指定表名（非必填）"></el-input>
+        <el-input v-model="form.tableName" placeholder="Specify a table name (non-required)"></el-input>
       </el-form-item>
-      <el-form-item label="Struct简称" prop="abbreviation">
-        <el-input v-model="form.abbreviation" placeholder="简称会作为入参对象名和路由group"></el-input>
+      <el-form-item label="Struct" prop="abbreviation">
+        <el-input v-model="form.abbreviation" placeholder="Abbreviation will be used as an entrance to object name and routing group"></el-input>
       </el-form-item>
-      <el-form-item label="Struct中文名称" prop="description">
-        <el-input v-model="form.description" placeholder="中文描述作为自动api描述"></el-input>
+      <el-form-item label="Struct Chinese name" prop="description">
+        <el-input v-model="form.description" placeholder="Chinese description as an automatic API description"></el-input>
       </el-form-item>
-      <el-form-item label="文件名称" prop="packageName">
-        <el-input v-model="form.packageName" placeholder="生成文件的默认名称"></el-input>
+      <el-form-item label="file name" prop="packageName">
+        <el-input v-model="form.packageName" placeholder="The default name for generating files"></el-input>
       </el-form-item>
-      <el-form-item label="自动创建api">
+      <el-form-item label="Automatically create an API">
         <el-checkbox v-model="form.autoCreateApiToSql"></el-checkbox>
       </el-form-item>
-      <el-form-item label="自动移动文件">
+      <el-form-item label="Automatic mobile file">
         <el-checkbox v-model="form.autoMoveFile"></el-checkbox>
       </el-form-item>
     </el-form>
-    <!-- 组件列表 -->
+    <!-- Component list -->
     <div class="button-box clearflex">
-      <el-button @click="editAndAddField()" type="primary">新增Field</el-button>
+      <el-button @click="editAndAddField()" type="primary">New Field</el-button>
     </div>
     <el-table :data="form.fields" border stripe>
-      <el-table-column type="index" label="序列" width="100"></el-table-column>
-      <el-table-column prop="fieldName" label="Field名"></el-table-column>
-      <el-table-column prop="fieldDesc" label="中文名"></el-table-column>
+      <el-table-column type="index" label="sequence" width="100"></el-table-column>
+      <el-table-column prop="fieldName" label="FIELD name"></el-table-column>
+      <el-table-column prop="fieldDesc" label="Chinese name"></el-table-column>
       <el-table-column prop="fieldJson" label="FieldJson"></el-table-column>
-      <el-table-column prop="fieldType" label="Field数据类型" width="130"></el-table-column>
-      <el-table-column prop="dataType" label="数据库字段类型" width="130"></el-table-column>
-      <el-table-column prop="dataTypeLong" label="数据库字段长度" width="130"></el-table-column>
-      <el-table-column prop="columnName" label="数据库字段" width="130"></el-table-column>
-      <el-table-column prop="comment" label="数据库字段描述" width="130"></el-table-column>
-      <el-table-column prop="fieldSearchType" label="搜索条件" width="130"></el-table-column>
-      <el-table-column prop="dictType" label="字典" width="130"></el-table-column>
-      <el-table-column label="操作" width="300">
+      <el-table-column prop="fieldType" label="Field data type" width="130"></el-table-column>
+      <el-table-column prop="dataType" label="Database field type" width="130"></el-table-column>
+      <el-table-column prop="dataTypeLong" label="Database field length" width="130"></el-table-column>
+      <el-table-column prop="columnName" label="Database field" width="130"></el-table-column>
+      <el-table-column prop="comment" label="Database field description" width="130"></el-table-column>
+      <el-table-column prop="fieldSearchType" label="search condition" width="130"></el-table-column>
+      <el-table-column prop="dictType" label="dictionary" width="130"></el-table-column>
+      <el-table-column label="operating" width="300">
         <template slot-scope="scope">
           <el-button
             size="mini"
             type="primary"
             icon="el-icon-edit"
             @click="editAndAddField(scope.row)"
-          >编辑</el-button>
+          >edit</el-button>
           <el-button
             size="mini"
             type="text"
             :disabled="scope.$index == 0"
             @click="moveUpField(scope.$index)"
-          >上移</el-button>
+          >Move up</el-button>
           <el-button
             size="mini"
             type="text"
             :disabled="(scope.$index + 1) == form.fields.length"
             @click="moveDownField(scope.$index)"
-          >下移</el-button>
+          >Move down</el-button>
           <el-popover placement="top" v-model="scope.row.visible">
-            <p>确定删除吗？</p>
+            <p>confirm to delete?</p>
             <div style="text-align: right; margin: 0">
-              <el-button size="mini" type="text" @click="scope.row.visible = false">取消</el-button>
-              <el-button type="primary" size="mini" @click="deleteField(scope.$index)">确定</el-button>
+              <el-button size="mini" type="text" @click="scope.row.visible = false">cancel</el-button>
+              <el-button type="primary" size="mini" @click="deleteField(scope.$index)">determine</el-button>
             </div>
-            <el-button size="mini" type="danger" icon="el-icon-delete" slot="reference">删除</el-button>
+            <el-button size="mini" type="danger" icon="el-icon-delete" slot="reference">delete</el-button>
           </el-popover>
         </template>
       </el-table-column>
     </el-table>
-    <el-tag type="danger">id , created_at , updated_at , deleted_at 会自动生成请勿重复创建</el-tag>
-    <!-- 组件列表 -->
+    <el-tag type="danger">id , created_at , updated_at , deleted_at Will automatically generate, do not create repeatedly</el-tag>
+    <!-- Component list -->
     <div class="button-box clearflex">
-      <el-button @click="enterForm(true)" type="primary">预览代码</el-button>
-      <el-button @click="enterForm(false)" type="primary">生成代码</el-button>
+      <el-button @click="enterForm(true)" type="primary">Preview code</el-button>
+      <el-button @click="enterForm(false)" type="primary">Code</el-button>
     </div>
-    <!-- 组件弹窗 -->
-    <el-dialog title="组件内容" :visible.sync="dialogFlag">
+    <!-- Component pop-up window -->
+    <el-dialog title="Component content" :visible.sync="dialogFlag">
       <FieldDialog v-if="dialogFlag" :dialogMiddle="dialogMiddle" ref="fieldDialog" />
       <div slot="footer" class="dialog-footer">
-        <el-button @click="closeDialog">取 消</el-button>
-        <el-button type="primary" @click="enterDialog">确 定</el-button>
+        <el-button @click="closeDialog">Take</el-button>
+        <el-button type="primary" @click="enterDialog">Confirm</el-button>
       </div>
     </el-dialog>
 
     <el-dialog :visible.sync="previewFlag">
       <PreviewCodeDialg v-if="previewFlag" :previewCode="preViewCode"></PreviewCodeDialg>
       <div slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="previewFlag = false">确 定</el-button>
+        <el-button type="primary" @click="previewFlag = false">Confirm</el-button>
       </div>
     </el-dialog>
   </div>
@@ -183,18 +183,18 @@ export default {
       },
       rules: {
         structName: [
-          { required: true, message: "请输入结构体名称", trigger: "blur" }
+          { required: true, message: "Please enter the structure name", trigger: "blur" }
         ],
         abbreviation: [
-          { required: true, message: "请输入结构体简称", trigger: "blur" }
+          { required: true, message: "Please enter the structure", trigger: "blur" }
         ],
         description: [
-          { required: true, message: "请输入结构体描述", trigger: "blur" }
+          { required: true, message: "Please enter a structure description", trigger: "blur" }
         ],
         packageName: [
           {
             required: true,
-            message: "文件名称：sys_xxxx_xxxx",
+            message: "file name：sys_xxxx_xxxx",
             trigger: "blur"
           }
         ]
@@ -266,7 +266,7 @@ export default {
       if (this.form.fields.length <= 0) {
         this.$message({
           type: "error",
-          message: "请填写至少一个field"
+          message: "Please fill in at least one field"
         });
         return false;
       }
@@ -275,7 +275,7 @@ export default {
       ) {
         this.$message({
           type: "error",
-          message: "存在与结构体同名的字段"
+          message: "There is a field with the same name with the structure"
         });
         return false;
       }
@@ -285,7 +285,7 @@ export default {
           if (this.form.structName == this.form.abbreviation) {
             this.$message({
               type: "error",
-              message: "structName和struct简称不能相同"
+              message: "StructName and Struct are abbrevite"
             });
             return false;
           }
@@ -301,13 +301,13 @@ export default {
             } else {
               this.$message({
                 type: "success",
-                message: "自动化代码创建成功，正在下载"
+                message: "Automation code creates success, downloading"
               });
             }
             const blob = new Blob([data]);
             const fileName = "ginvueadmin.zip";
             if ("download" in document.createElement("a")) {
-              // 不是IE浏览器
+              // Not IE browser
               let url = window.URL.createObjectURL(blob);
               let link = document.createElement("a");
               link.style.display = "none";
@@ -315,8 +315,8 @@ export default {
               link.setAttribute("download", fileName);
               document.body.appendChild(link);
               link.click();
-              document.body.removeChild(link); // 下载完成移除元素
-              window.URL.revokeObjectURL(url); // 释放掉blob对象
+              document.body.removeChild(link); // Download completion removal element
+              window.URL.revokeObjectURL(url); // Release Blob object
             } else {
               // IE 10+
               window.navigator.msSaveBlob(blob, fileName);
@@ -358,7 +358,7 @@ export default {
               const fbHump = toHump(item.columnName);
               this.form.fields.push({
                 fieldName: toUpperCase(fbHump),
-                fieldDesc: item.columnComment || fbHump + "字段",
+                fieldDesc: item.columnComment || fbHump + "Field",
                 fieldType: this.fdMap[item.dataType],
                 dataType: item.dataType,
                 fieldJson: fbHump,

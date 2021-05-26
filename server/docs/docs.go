@@ -41,10 +41,10 @@ var doc = `{
                 "tags": [
                     "SysApi"
                 ],
-                "summary": "创建基础api",
+                "summary": "Create a foundation API",
                 "parameters": [
                     {
-                        "description": "api路径, api中文描述, api组, 方法",
+                        "description": "API path, API Chinese description, API group, method",
                         "name": "data",
                         "in": "body",
                         "required": true,
@@ -55,7 +55,7 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "{\"success\":true,\"data\":{},\"msg\":\"创建成功\"}",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"Create success\"}",
                         "schema": {
                             "type": "string"
                         }
@@ -79,7 +79,7 @@ var doc = `{
                 "tags": [
                     "SysApi"
                 ],
-                "summary": "删除api",
+                "summary": "Delete API",
                 "parameters": [
                     {
                         "description": "ID",
@@ -93,7 +93,7 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "{\"success\":true,\"data\":{},\"msg\":\"删除成功\"}",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"successfully deleted\"}",
                         "schema": {
                             "type": "string"
                         }
@@ -117,7 +117,7 @@ var doc = `{
                 "tags": [
                     "SysApi"
                 ],
-                "summary": "删除选中Api",
+                "summary": "Delete selected API",
                 "parameters": [
                     {
                         "description": "ID",
@@ -131,7 +131,7 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "{\"success\":true,\"data\":{},\"msg\":\"删除成功\"}",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"successfully deleted\"}",
                         "schema": {
                             "type": "string"
                         }
@@ -155,10 +155,10 @@ var doc = `{
                 "tags": [
                     "SysApi"
                 ],
-                "summary": "获取所有的Api 不分页",
+                "summary": "Get all APIs missed",
                 "responses": {
                     "200": {
-                        "description": "{\"success\":true,\"data\":{},\"msg\":\"获取成功\"}",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"Get successful\"}",
                         "schema": {
                             "type": "string"
                         }
@@ -182,10 +182,10 @@ var doc = `{
                 "tags": [
                     "SysApi"
                 ],
-                "summary": "根据id获取api",
+                "summary": "Get API according to ID",
                 "parameters": [
                     {
-                        "description": "根据id获取api",
+                        "description": "Get API according to ID",
                         "name": "data",
                         "in": "body",
                         "required": true,
@@ -196,7 +196,7 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "{\"success\":true,\"data\":{},\"msg\":\"获取成功\"}",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"Get successful\"}",
                         "schema": {
                             "type": "string"
                         }
@@ -220,10 +220,10 @@ var doc = `{
                 "tags": [
                     "SysApi"
                 ],
-                "summary": "分页获取API列表",
+                "summary": "Page Get API list",
                 "parameters": [
                     {
-                        "description": "分页获取API列表",
+                        "description": "Page Get API list",
                         "name": "data",
                         "in": "body",
                         "required": true,
@@ -234,7 +234,7 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "{\"success\":true,\"data\":{},\"msg\":\"获取成功\"}",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"Get successful\"}",
                         "schema": {
                             "type": "string"
                         }
@@ -258,10 +258,10 @@ var doc = `{
                 "tags": [
                     "SysApi"
                 ],
-                "summary": "创建基础api",
+                "summary": "Create a foundation API",
                 "parameters": [
                     {
-                        "description": "api路径, api中文描述, api组, 方法",
+                        "description": "API path, API Chinese description, API group, method",
                         "name": "data",
                         "in": "body",
                         "required": true,
@@ -272,7 +272,7 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "{\"success\":true,\"data\":{},\"msg\":\"修改成功\"}",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"Successfully modified\"}",
                         "schema": {
                             "type": "string"
                         }
@@ -296,10 +296,10 @@ var doc = `{
                 "tags": [
                     "Authority"
                 ],
-                "summary": "拷贝角色",
+                "summary": "Copy role",
                 "parameters": [
                     {
-                        "description": "旧角色id, 新权限id, 新权限名, 新父角色id",
+                        "description": "Old role ID, new permissions ID, new weight name, new parent role ID",
                         "name": "data",
                         "in": "body",
                         "required": true,
@@ -310,7 +310,7 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "{\"success\":true,\"data\":{},\"msg\":\"拷贝成功\"}",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"Copy success\"}",
                         "schema": {
                             "type": "string"
                         }
@@ -334,10 +334,10 @@ var doc = `{
                 "tags": [
                     "Authority"
                 ],
-                "summary": "创建角色",
+                "summary": "Creating a Role",
                 "parameters": [
                     {
-                        "description": "权限id, 权限名, 父角色id",
+                        "description": "Permission ID, permission name, parent ID",
                         "name": "data",
                         "in": "body",
                         "required": true,
@@ -348,7 +348,7 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "{\"success\":true,\"data\":{},\"msg\":\"创建成功\"}",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"Create success\"}",
                         "schema": {
                             "type": "string"
                         }
@@ -372,10 +372,10 @@ var doc = `{
                 "tags": [
                     "Authority"
                 ],
-                "summary": "删除角色",
+                "summary": "Delete role",
                 "parameters": [
                     {
-                        "description": "删除角色",
+                        "description": "Delete role",
                         "name": "data",
                         "in": "body",
                         "required": true,
@@ -386,7 +386,7 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "{\"success\":true,\"data\":{},\"msg\":\"删除成功\"}",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"successfully deleted\"}",
                         "schema": {
                             "type": "string"
                         }
@@ -410,10 +410,10 @@ var doc = `{
                 "tags": [
                     "Authority"
                 ],
-                "summary": "分页获取角色列表",
+                "summary": "Page Get Role List",
                 "parameters": [
                     {
-                        "description": "页码, 每页大小",
+                        "description": "Page number, per page size",
                         "name": "data",
                         "in": "body",
                         "required": true,
@@ -424,7 +424,7 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "{\"success\":true,\"data\":{},\"msg\":\"获取成功\"}",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"Get successful\"}",
                         "schema": {
                             "type": "string"
                         }
@@ -448,10 +448,10 @@ var doc = `{
                 "tags": [
                     "Authority"
                 ],
-                "summary": "设置角色资源权限",
+                "summary": "Set role resource permissions",
                 "parameters": [
                     {
-                        "description": "设置角色资源权限",
+                        "description": "Set role resource permissions",
                         "name": "data",
                         "in": "body",
                         "required": true,
@@ -462,7 +462,7 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "{\"success\":true,\"data\":{},\"msg\":\"设置成功\"}",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"Set success\"}",
                         "schema": {
                             "type": "string"
                         }
@@ -486,10 +486,10 @@ var doc = `{
                 "tags": [
                     "Authority"
                 ],
-                "summary": "更新角色信息",
+                "summary": "Update role information",
                 "parameters": [
                     {
-                        "description": "权限id, 权限名, 父角色id",
+                        "description": "Permission ID, permission name, parent ID",
                         "name": "data",
                         "in": "body",
                         "required": true,
@@ -500,7 +500,7 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "{\"success\":true,\"data\":{},\"msg\":\"更新成功\"}",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"update completed\"}",
                         "schema": {
                             "type": "string"
                         }
@@ -524,10 +524,10 @@ var doc = `{
                 "tags": [
                     "AutoCode"
                 ],
-                "summary": "自动代码模板",
+                "summary": "Automatic code template",
                 "parameters": [
                     {
-                        "description": "创建自动代码",
+                        "description": "Create an automatic code",
                         "name": "data",
                         "in": "body",
                         "required": true,
@@ -538,7 +538,7 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "{\"success\":true,\"data\":{},\"msg\":\"创建成功\"}",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"Create success\"}",
                         "schema": {
                             "type": "string"
                         }
@@ -562,10 +562,10 @@ var doc = `{
                 "tags": [
                     "AutoCode"
                 ],
-                "summary": "获取当前表所有字段",
+                "summary": "Get all fields of the current table",
                 "responses": {
                     "200": {
-                        "description": "{\"success\":true,\"data\":{},\"msg\":\"获取成功\"}",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"Get successful\"}",
                         "schema": {
                             "type": "string"
                         }
@@ -589,10 +589,10 @@ var doc = `{
                 "tags": [
                     "AutoCode"
                 ],
-                "summary": "获取当前所有数据库",
+                "summary": "Get all current databases",
                 "responses": {
                     "200": {
-                        "description": "{\"success\":true,\"data\":{},\"msg\":\"获取成功\"}",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"Get successful\"}",
                         "schema": {
                             "type": "string"
                         }
@@ -700,7 +700,7 @@ var doc = `{
                 "tags": [
                     "Base"
                 ],
-                "summary": "用户登录",
+                "summary": "User login",
                 "parameters": [
                     {
                         "description": "用户名, 密码, 验证码",
@@ -2872,31 +2872,31 @@ var doc = `{
             "type": "object",
             "properties": {
                 "from": {
-                    "description": "收件人",
+                    "description": "Recipient",
                     "type": "string"
                 },
                 "host": {
-                    "description": "服务器地址",
+                    "description": "server address",
                     "type": "string"
                 },
                 "isSSL": {
-                    "description": "是否SSL",
+                    "description": "Whether SSL",
                     "type": "boolean"
                 },
                 "nickname": {
-                    "description": "昵称",
+                    "description": "nickname",
                     "type": "string"
                 },
                 "port": {
-                    "description": "端口",
+                    "description": "port",
                     "type": "integer"
                 },
                 "secret": {
-                    "description": "密钥",
+                    "description": "Key",
                     "type": "string"
                 },
                 "to": {
-                    "description": "收件人:多个以英文逗号分隔",
+                    "description": "Recipient: Multiple English comma separation",
                     "type": "string"
                 }
             }
@@ -2913,15 +2913,15 @@ var doc = `{
             "type": "object",
             "properties": {
                 "bufferTime": {
-                    "description": "缓冲时间",
+                    "description": "Buffer time",
                     "type": "integer"
                 },
                 "expiresTime": {
-                    "description": "过期时间",
+                    "description": "expire date",
                     "type": "integer"
                 },
                 "signingKey": {
-                    "description": "jwt签名",
+                    "description": "JWT signature",
                     "type": "string"
                 }
             }
@@ -2930,7 +2930,7 @@ var doc = `{
             "type": "object",
             "properties": {
                 "path": {
-                    "description": "本地文件路径",
+                    "description": "Local file path",
                     "type": "string"
                 }
             }
@@ -2939,38 +2939,38 @@ var doc = `{
             "type": "object",
             "properties": {
                 "config": {
-                    "description": "高级配置",
+                    "description": "Advanced configuration",
                     "type": "string"
                 },
                 "dbname": {
-                    "description": "数据库名",
+                    "description": "data storage name",
                     "type": "string"
                 },
                 "logMode": {
-                    "description": "是否开启Gorm全局日志",
+                    "description": "Whether to open GORM global log",
                     "type": "boolean"
                 },
                 "logZap": {
                     "type": "string"
                 },
                 "maxIdleConns": {
-                    "description": "空闲中的最大连接数",
+                    "description": "The maximum number of connections in idle",
                     "type": "integer"
                 },
                 "maxOpenConns": {
-                    "description": "打开到数据库的最大连接数",
+                    "description": "Open the maximum connection to the database",
                     "type": "integer"
                 },
                 "password": {
-                    "description": "数据库密码",
+                    "description": "Database password",
                     "type": "string"
                 },
                 "path": {
-                    "description": "服务器地址:端口",
+                    "description": "Server address: port",
                     "type": "string"
                 },
                 "username": {
-                    "description": "数据库用户名",
+                    "description": "database username",
                     "type": "string"
                 }
             }
@@ -2979,11 +2979,11 @@ var doc = `{
             "type": "object",
             "properties": {
                 "accessKey": {
-                    "description": "秘钥AK",
+                    "description": "Secret key ak",
                     "type": "string"
                 },
                 "bucket": {
-                    "description": "空间名称",
+                    "description": "Spatial name",
                     "type": "string"
                 },
                 "imgPath": {
@@ -3194,15 +3194,15 @@ var doc = `{
                     "type": "string"
                 },
                 "autoCreateApiToSql": {
-                    "description": "是否自动创建api",
+                    "description": "Whether to create an API",
                     "type": "boolean"
                 },
                 "autoMoveFile": {
-                    "description": "是否自动移动文件",
+                    "description": "Whether automatic mobile files",
                     "type": "boolean"
                 },
                 "description": {
-                    "description": "Struct中文名称",
+                    "description": "Struct Chinese name",
                     "type": "string"
                 },
                 "fields": {
@@ -3212,15 +3212,15 @@ var doc = `{
                     }
                 },
                 "packageName": {
-                    "description": "文件名称",
+                    "description": "file name",
                     "type": "string"
                 },
                 "structName": {
-                    "description": "Struct名称",
+                    "description": "Struct Name",
                     "type": "string"
                 },
                 "tableName": {
-                    "description": "表名",
+                    "description": "Table Name",
                     "type": "string"
                 }
             }
@@ -3637,43 +3637,43 @@ var doc = `{
                     "type": "string"
                 },
                 "createdAt": {
-                    "description": "创建时间",
+                    "description": "Create time",
                     "type": "string"
                 },
                 "error_message": {
-                    "description": "错误信息",
+                    "description": "Error message",
                     "type": "string"
                 },
                 "id": {
-                    "description": "主键ID",
+                    "description": "Master key ID",
                     "type": "integer"
                 },
                 "ip": {
-                    "description": "请求ip",
+                    "description": "Request IP",
                     "type": "string"
                 },
                 "latency": {
-                    "description": "延迟",
+                    "description": "delay",
                     "type": "string"
                 },
                 "method": {
-                    "description": "请求方法",
+                    "description": "Request method",
                     "type": "string"
                 },
                 "path": {
-                    "description": "请求路径",
+                    "description": "Request path",
                     "type": "string"
                 },
                 "resp": {
-                    "description": "响应Body",
+                    "description": "Response body",
                     "type": "string"
                 },
                 "status": {
-                    "description": "请求状态",
+                    "description": "Request status",
                     "type": "integer"
                 },
                 "updatedAt": {
-                    "description": "更新时间",
+                    "description": "Update time",
                     "type": "string"
                 },
                 "user": {
@@ -3716,7 +3716,7 @@ var doc = `{
                     "type": "string"
                 },
                 "userName": {
-                    "description": "用户登录名",
+                    "description": "User login name",
                     "type": "string"
                 },
                 "uuid": {
@@ -4037,7 +4037,7 @@ var doc = `{
                     "type": "string"
                 },
                 "updatedAt": {
-                    "description": "更新时间",
+                    "description": "Update time",
                     "type": "string"
                 }
             }
@@ -4046,27 +4046,27 @@ var doc = `{
             "type": "object",
             "properties": {
                 "agent": {
-                    "description": "代理",
+                    "description": "proxy",
                     "type": "string"
                 },
                 "body": {
-                    "description": "请求Body",
+                    "description": "Request Body",
                     "type": "string"
                 },
                 "createdAt": {
-                    "description": "创建时间",
+                    "description": "Create time",
                     "type": "string"
                 },
                 "error_message": {
-                    "description": "错误信息",
+                    "description": "Error message",
                     "type": "string"
                 },
                 "id": {
-                    "description": "主键ID",
+                    "description": "Master key ID",
                     "type": "integer"
                 },
                 "ip": {
-                    "description": "请求ip",
+                    "description": "Request IP",
                     "type": "string"
                 },
                 "latency": {

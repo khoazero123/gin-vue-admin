@@ -5,13 +5,14 @@ import (
 	"fmt"
 	"gin-vue-admin/global"
 	"gin-vue-admin/model"
-	"github.com/360EntSecGroup-Skylar/excelize/v2"
 	"strconv"
+
+	"github.com/360EntSecGroup-Skylar/excelize/v2"
 )
 
 func ParseInfoList2Excel(infoList []model.SysBaseMenu, filePath string) error {
 	excel := excelize.NewFile()
-	excel.SetSheetRow("Sheet1", "A1", &[]string{"ID", "路由Name", "路由Path", "是否隐藏", "父节点", "排序", "文件名称"})
+	excel.SetSheetRow("Sheet1", "A1", &[]string{"ID", "Route Name", "Routing Path", "Whether hidden", "Parent", "Sort", "file name"})
 	for i, menu := range infoList {
 		axis := fmt.Sprintf("A%d", i+2)
 		excel.SetSheetRow("Sheet1", axis, &[]interface{}{
@@ -30,7 +31,7 @@ func ParseInfoList2Excel(infoList []model.SysBaseMenu, filePath string) error {
 
 func ParseExcel2InfoList() ([]model.SysBaseMenu, error) {
 	skipHeader := true
-	fixedHeader := []string{"ID", "路由Name", "路由Path", "是否隐藏", "父节点", "排序", "文件名称"}
+	fixedHeader := []string{"ID", "Route Name", "Routing Path", "Whether hidden", "Parent", "Sort", "file name"}
 	file, err := excelize.OpenFile(global.GVA_CONFIG.Excel.Dir + "ExcelImport.xlsx")
 	if err != nil {
 		return nil, err

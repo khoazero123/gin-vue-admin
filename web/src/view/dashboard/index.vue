@@ -13,10 +13,10 @@
                 </el-col>
                 <el-col :xs="20" :lg="12" :md="12">
                   <div class="text">
-                    <h4>早安，管理员， 请开始您一天的工作吧！</h4>
+                    <h4>Good morning, administrator, please start your day!</h4>
                     <p class="tips-text">
                       <i class="el-icon-sunny el-icon"></i>
-                      <span>今日晴，0℃ - 10℃，天气寒冷，注意添加衣物。</span>
+                      <span>Today is sunny, 0 ° C - 10 ° C, the weather is cold, pay attention to add clothes.</span>
                     </p>
                   </div>
                 </el-col>
@@ -30,7 +30,7 @@
               <el-col :span="8"
                 ><div class="car-item">
                   <span class="flow"><i class="el-icon-s-grid"></i></span>
-                  <span>今日流量 </span>
+                  <span>Today's traffic </span>
                   <b>13260</b>
                 </div></el-col
               >
@@ -39,7 +39,7 @@
                   <span class="user-number">
                     <i class="el-icon-s-custom"></i>
                   </span>
-                  <span>总用户 </span>
+                  <span>Total user </span>
                   <b>48286</b>
                 </div></el-col
               >
@@ -48,7 +48,7 @@
                   <span class="feedback">
                     <i class="el-icon-star-on"></i>
                   </span>
-                  <span>好评率 </span>
+                  <span>Praise rate </span>
                   <b>98%</b>
                 </div></el-col
               >
@@ -60,11 +60,11 @@
     <el-row>
       <el-card shadow="hover">
           <h2>
-            使用教学：<a style="color:#409EFF"  target="view_window" href="https://www.bilibili.com/video/BV1fV411y7dT/">https://www.bilibili.com/video/BV1fV411y7dT/</a>
+            Use teaching:<a style="color:#409EFF"  target="view_window" href="https://www.bilibili.com/video/BV1fV411y7dT/">https://www.bilibili.com/video/BV1fV411y7dT/</a>
           </h2>
           <br>
           <h2>
-            工作流教学：<a style="color:#409EFF"  target="view_window" href="https://www.bilibili.com/video/BV1Ka411F7Ji/">https://www.bilibili.com/video/BV1Ka411F7Ji/</a>
+            Workflow teaching:<a style="color:#409EFF"  target="view_window" href="https://www.bilibili.com/video/BV1Ka411F7Ji/">https://www.bilibili.com/video/BV1Ka411F7Ji/</a>
           </h2>
           <div></div>
       </el-card>
@@ -112,37 +112,37 @@ export default {
     return {
       toolCards: [
         {
-          label: "用户管理",
+          label: "User Management",
           icon: "el-icon el-icon-monitor",
           name: "user",
           color: "#ff9c6e",
         },
         {
-          label: "角色管理",
+          label: "Role management",
           icon: "el-icon el-icon-setting",
           name: "authority",
           color: "#69c0ff",
         },
         {
-          label: "菜单管理",
+          label: "Menu management",
           icon: "el-icon el-icon-menu",
           name: "menu",
           color: "#b37feb",
         },
         {
-          label: "代码生成器",
+          label: "Code generator",
           icon: "el-icon el-icon-cpu",
           name: "autoCode",
           color: "#ffd666",
         },
         {
-          label: "表单生成器",
+          label: "Form generator",
           icon: "el-icon el-icon-document-checked",
           name: "formCreate",
           color: "#ff85c0",
         },
         {
-          label: "关于我们",
+          label: "about Us",
           icon: "el-icon el-icon-user",
           name: "about",
           color: "#5cdbd3",
@@ -154,11 +154,11 @@ export default {
     ...mapGetters("user", ["userInfo"]),
   },
   components: {
-    musicPlayer, //音乐播放器
+    musicPlayer, //music player
     TodoList, //TodoList
-    // RaddarChart, //雷达图
-    // stackMap, //堆叠图
-    // Sunburst, //旭日图
+    // RaddarChart, //Radar chart
+    // stackMap, //Stacked map
+    // Sunburst, //Rising day
   },
   methods: {
     toTarget(name) {

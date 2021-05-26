@@ -2,6 +2,7 @@ package source
 
 import (
 	"gin-vue-admin/global"
+
 	"github.com/gookit/color"
 	"gorm.io/gorm"
 )
@@ -61,17 +62,17 @@ var authorityMenus = []AuthorityMenus{
 }
 
 //@author: [SliverHorn](https://github.com/SliverHorn)
-//@description: sys_authority_menus 表数据初始化
+//@description: sys_authority_menus Table data initialization
 func (a *authoritiesMenus) Init() error {
 	return global.GVA_DB.Table("sys_authority_menus").Transaction(func(tx *gorm.DB) error {
 		if tx.Where("sys_authority_authority_id IN ('888', '8881', '9528')").Find(&[]AuthorityMenus{}).RowsAffected == 48 {
-			color.Danger.Println("\n[Mysql] --> sys_authority_menus 表的初始数据已存在!")
+			color.Danger.Println("\n[Mysql] --> sys_authority_menus The initial data of the table already exists!")
 			return nil
 		}
-		if err := tx.Create(&authorityMenus).Error; err != nil { // 遇到错误时回滚事务
+		if err := tx.Create(&authorityMenus).Error; err != nil { // Magnification
 			return err
 		}
-		color.Info.Println("\n[Mysql] --> sys_authority_menus 表初始数据成功!")
+		color.Info.Println("\n[Mysql] --> sys_authority_menus Table initial data success!")
 		return nil
 	})
 }

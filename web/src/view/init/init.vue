@@ -1,36 +1,36 @@
 <template>
   <div class="init">
-    <p class="in-one a-fadeinT">欢迎使用GIN-VUE-ADMIN</p>
-    <p class="in-two a-fadeinT">您需要初始化您的数据库并且填充初始数据</p>
+    <p class="in-one a-fadeinT">Welcome to GIN-VUE-ADMIN</p>
+    <p class="in-two a-fadeinT">You need to initialize your database and populate the initial data</p>
     <div class="form-card in-three a-fadeinB">
       <el-form ref="form" :model="form" label-width="100px">
-        <el-form-item label="数据库类型">
-          <el-select disabled v-model="form.sqlType" placeholder="请选择">
-            <el-option key="mysql" label="mysql(目前只支持mysql)" value="mysql">
+        <el-form-item label="Database type">
+          <el-select disabled v-model="form.sqlType" placeholder="please choose">
+            <el-option key="mysql" label="mysql(I only support mysql)" value="mysql">
             </el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="host">
-          <el-input v-model="form.host" placeholder="请输入数据库链接"></el-input>
+          <el-input v-model="form.host" placeholder="Please enter the database link"></el-input>
         </el-form-item>
         <el-form-item label="port">
-          <el-input v-model="form.port" placeholder="请输入数据库端口"></el-input>
+          <el-input v-model="form.port" placeholder="Please enter the database port"></el-input>
         </el-form-item>
         <el-form-item label="userName">
-          <el-input v-model="form.userName" placeholder="请输入数据库用户名"></el-input>
+          <el-input v-model="form.userName" placeholder="Please enter the database username"></el-input>
         </el-form-item>
         <el-form-item label="password">
           <el-input
             v-model="form.password"
-            placeholder="请输入数据库密码（没有则为空）"
+            placeholder="Please enter the database password (no empty)"
           ></el-input>
         </el-form-item>
         <el-form-item label="dbName">
-          <el-input v-model="form.dbName" placeholder="请输入数据库名称"></el-input>
+          <el-input v-model="form.dbName" placeholder="Please enter the name of the database"></el-input>
         </el-form-item>
         <el-form-item>
           <div style="text-align: right">
-            <el-button type="primary" @click="onSubmit">立即初始化</el-button>
+            <el-button type="primary" @click="onSubmit">Immediate initialization</el-button>
           </div>
         </el-form-item>
       </el-form>
@@ -58,7 +58,7 @@ export default {
     async onSubmit() {
       const loading = this.$loading({
         lock: true,
-        text: "正在初始化数据库，请稍候",
+        text: "Initializing the database, please wait",
         spinner: "el-icon-loading",
         background: "rgba(0, 0, 0, 0.7)",
       });

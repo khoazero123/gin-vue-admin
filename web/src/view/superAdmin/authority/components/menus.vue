@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="clearflex">
-      <el-button @click="relation" class="fl-right" size="small" type="primary">确 定</el-button>
+      <el-button @click="relation" class="fl-right" size="small" type="primary">Confirm</el-button>
     </div>
     <el-tree
       :data="menuTreeData"
@@ -23,7 +23,7 @@
             :style="{color:row.defaultRouter == data.name?'#E6A23C':'#85ce61'}"
             :disabled="!node.checked"
             @click="() => setDefault(data)">
-            {{row.defaultRouter == data.name?"首页":"设为首页"}}
+            {{row.defaultRouter == data.name?"Homepage":"Setup as front page"}}
           </el-button>
         </span>
       </span>
@@ -62,18 +62,18 @@ export default {
     async setDefault(data){
       const res = await updateAuthority({authorityId: this.row.authorityId,AuthorityName: this.row.authorityName,parentId: this.row.parentId,defaultRouter:data.name})
       if(res.code == 0){
-        this.$message({type:"success",message:"设置成功"})
+        this.$message({type:"success",message:"Set success"})
         this.row.defaultRouter = res.data.authority.defaultRouter
       }
     },
     nodeChange(){
       this.needConfirm = true
     },
-    // 暴露给外层使用的切换拦截统一方法
+    // Switching interception method for exposure to outer layers
     enterAndNext(){
       this.relation()
     },
-    // 关联树 确认方法
+    // Related tree confirmation method
     async relation() {
       const checkArr = this.$refs.menuTree.getCheckedNodes(false, true)
       const res = await addMenuAuthority({
@@ -83,13 +83,13 @@ export default {
       if (res.code == 0) {
         this.$message({
           type: 'success',
-          message: '菜单设置成功!'
+          message: 'Menu setup success!'
         })
       }
     }
   },
   async created() {
-    // 获取所有菜单树
+    // Get all menus trees
     const res = await getBaseMenuTree()
     this.menuTreeData = res.data.menus
 
@@ -97,7 +97,7 @@ export default {
     const menus = res1.data.menus
     const arr = []
     menus.map(item => {
-      // 防止直接选中父级造成全选
+      // Prevent direct selection of parents
       if (!menus.some(same => same.parentId === item.menuId)) {
         arr.push(Number(item.menuId))
       }

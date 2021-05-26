@@ -51,10 +51,10 @@
           </div>
         </template>
       </el-table-column>
-      <el-table-column label="请求ip" prop="ip" width="120"></el-table-column>
-      <el-table-column label="请求方法" prop="method" width="120"></el-table-column>
-      <el-table-column label="请求路径" prop="path" width="240"></el-table-column>
-      <el-table-column label="请求" prop="path" width="80">
+      <el-table-column label="Request IP" prop="ip" width="120"></el-table-column>
+      <el-table-column label="Request method" prop="method" width="120"></el-table-column>
+      <el-table-column label="Request path" prop="path" width="240"></el-table-column>
+      <el-table-column label="request" prop="path" width="80">
         <template slot-scope="scope">
           <div>
             <el-popover placement="top-start" trigger="hover" v-if="scope.row.body">
