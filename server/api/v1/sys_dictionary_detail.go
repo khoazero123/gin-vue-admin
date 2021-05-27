@@ -7,6 +7,7 @@ import (
 	"gin-vue-admin/model/response"
 	"gin-vue-admin/service"
 	"gin-vue-admin/utils"
+
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 )
@@ -84,10 +85,10 @@ func FindSysDictionaryDetail(c *gin.Context) {
 		return
 	}
 	if err, resysDictionaryDetail := service.GetSysDictionaryDetail(detail.ID); err != nil {
-		global.GVA_LOG.Error("查询失败!", zap.Any("err", err))
-		response.FailWithMessage("查询失败", c)
+		global.GVA_LOG.Error("Query failed!", zap.Any("err", err))
+		response.FailWithMessage("Query failed", c)
 	} else {
-		response.OkWithDetailed(gin.H{"resysDictionaryDetail": resysDictionaryDetail}, "查询成功", c)
+		response.OkWithDetailed(gin.H{"resysDictionaryDetail": resysDictionaryDetail}, "search successful", c)
 	}
 }
 

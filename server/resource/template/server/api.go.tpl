@@ -98,8 +98,8 @@ func Find{{.StructName}}(c *gin.Context) {
 	var {{.Abbreviation}} model.{{.StructName}}
 	_ = c.ShouldBindQuery(&{{.Abbreviation}})
 	if err, re{{.Abbreviation}} := service.Get{{.StructName}}({{.Abbreviation}}.ID); err != nil {
-        global.GVA_LOG.Error("查询失败!", zap.Any("err", err))
-		response.FailWithMessage("查询失败", c)
+        global.GVA_LOG.Error("Query failed!", zap.Any("err", err))
+		response.FailWithMessage("Query failed", c)
 	} else {
 		response.OkWithData(gin.H{"re{{.Abbreviation}}": re{{.Abbreviation}}}, c)
 	}

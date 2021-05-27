@@ -1,6 +1,6 @@
 <template>
   <div>
-    <span style="color:red">搜索时如果条件为LIKE只支持字符串</span>
+    <span style="color:red">If the condition is LIKE, only the string is supported.</span>
     <el-form
       :model="dialogMiddle"
       ref="fieldDialogFrom"
@@ -8,15 +8,15 @@
       label-position="left"
       :rules="rules"
     >
-      <el-form-item label="Field名称" prop="fieldName">
+      <el-form-item label="Field name" prop="fieldName">
         <el-col :span="6">
           <el-input v-model="dialogMiddle.fieldName" autocomplete="off"></el-input>
         </el-col>
         <el-col :offset="1" :span="2">
-          <el-button @click="autoFill">自动填充</el-button>
+          <el-button @click="autoFill">Automatic filling</el-button>
         </el-col>
       </el-form-item>
-      <el-form-item label="Field中文名" prop="fieldDesc">
+      <el-form-item label="Field Chinese name" prop="fieldDesc">
         <el-col :span="6">
           <el-input v-model="dialogMiddle.fieldDesc" autocomplete="off"></el-input>
         </el-col>
@@ -26,21 +26,21 @@
           <el-input v-model="dialogMiddle.fieldJson" autocomplete="off"></el-input>
         </el-col>
       </el-form-item>
-      <el-form-item label="数据库字段名" prop="columnName">
+      <el-form-item label="Database field name" prop="columnName">
         <el-col :span="6">
           <el-input v-model="dialogMiddle.columnName" autocomplete="off"></el-input>
         </el-col>
       </el-form-item>
-      <el-form-item label="数据库字段描述" prop="comment">
+      <el-form-item label="Database field description" prop="comment">
         <el-col :span="6">
           <el-input v-model="dialogMiddle.comment" autocomplete="off"></el-input>
         </el-col>
       </el-form-item>
-      <el-form-item label="Field数据类型" prop="fieldType">
+      <el-form-item label="Field data type" prop="fieldType">
         <el-col :span="8">
           <el-select
             v-model="dialogMiddle.fieldType"
-            placeholder="请选择field数据类型"
+            placeholder="Please select Field data type"
             @change="getDbfdOptions"
             clearable
           >
@@ -54,12 +54,12 @@
         </el-col>
       </el-form-item>
 
-      <el-form-item label="数据库字段类型" prop="dataType">
+      <el-form-item label="Database field type" prop="dataType">
         <el-col :span="8">
           <el-select
             :disabled="!dialogMiddle.fieldType"
             v-model="dialogMiddle.dataType"
-            placeholder="请选择数据库字段类型"
+            placeholder="Please select the database field type"
             clearable
           >
             <el-option
@@ -71,14 +71,14 @@
           </el-select>
         </el-col>
       </el-form-item>
-      <el-form-item label="数据库字段长度" prop="dataTypeLong">
+      <el-form-item label="Database field length" prop="dataTypeLong">
         <el-col :span="8">
-          <el-input placeholder="自定义类型必须指定长度" :disabled="!dialogMiddle.dataType" v-model="dialogMiddle.dataTypeLong"></el-input>
+          <el-input placeholder="Customized type must be specified" :disabled="!dialogMiddle.dataType" v-model="dialogMiddle.dataTypeLong"></el-input>
         </el-col>
       </el-form-item>
-      <el-form-item label="Field查询条件" prop="fieldSearchType">
+      <el-form-item label="Field query conditions" prop="fieldSearchType">
         <el-col :span="8">
-          <el-select v-model="dialogMiddle.fieldSearchType" placeholder="请选择Field查询条件" clearable>
+          <el-select v-model="dialogMiddle.fieldSearchType" placeholder="Please select Field Query Conditions" clearable>
             <el-option
               v-for="item in typeSearchOptions"
               :key="item.value"
@@ -89,9 +89,9 @@
         </el-col>
       </el-form-item>
 
-      <el-form-item label="关联字典" prop="dictType">
+      <el-form-item label="Associate dictionary" prop="dictType">
         <el-col :span="8">
-          <el-select :disabled="dialogMiddle.fieldType!='int'" v-model="dialogMiddle.dictType" placeholder="请选择字典" clearable>
+          <el-select :disabled="dialogMiddle.fieldType!='int'" v-model="dialogMiddle.dictType" placeholder="Please select a dictionary" clearable>
             <el-option
               v-for="item in dictOptions"
               :key="item.type"
@@ -146,41 +146,41 @@ export default {
       ],
       typeOptions: [
         {
-          label: "字符串",
+          label: "String",
           value: "string"
         },
         {
-          label: "整型",
+          label: "Integrity",
           value: "int"
         },
         {
-          label: "布尔值",
+          label: "Boolean value",
           value: "bool"
         },
         {
-          label: "浮点型",
+          label: "Floating point",
           value: "float64"
         },
         {
-          label: "时间",
+          label: "time",
           value: "time.Time"
         }
       ],
       rules: {
         fieldName: [
-          { required: true, message: "请输入field英文名", trigger: "blur" }
+          { required: true, message: "Please enter the Field English name", trigger: "blur" }
         ],
         fieldDesc: [
-          { required: true, message: "请输入field中文名", trigger: "blur" }
+          { required: true, message: "Please enter the Field Chinese name", trigger: "blur" }
         ],
         fieldJson: [
-          { required: true, message: "请输入field格式化json", trigger: "blur" }
+          { required: true, message: "Please enter Field format JSON", trigger: "blur" }
         ],
         columnName: [
-          { required: true, message: "请输入数据库字段", trigger: "blur" }
+          { required: true, message: "Please enter the database field", trigger: "blur" }
         ],
         fieldType: [
-          { required: true, message: "请选择field数据类型", trigger: "blur" }
+          { required: true, message: "Please select Field data type", trigger: "blur" }
         ]
       }
     };

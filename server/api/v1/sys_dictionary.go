@@ -7,6 +7,7 @@ import (
 	"gin-vue-admin/model/response"
 	"gin-vue-admin/service"
 	"gin-vue-admin/utils"
+
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 )
@@ -80,10 +81,10 @@ func FindSysDictionary(c *gin.Context) {
 	var dictionary model.SysDictionary
 	_ = c.ShouldBindQuery(&dictionary)
 	if err, sysDictionary := service.GetSysDictionary(dictionary.Type, dictionary.ID); err != nil {
-		global.GVA_LOG.Error("查询失败!", zap.Any("err", err))
-		response.FailWithMessage("查询失败", c)
+		global.GVA_LOG.Error("Query failed!", zap.Any("err", err))
+		response.FailWithMessage("Query failed", c)
 	} else {
-		response.OkWithDetailed(gin.H{"resysDictionary": sysDictionary}, "查询成功", c)
+		response.OkWithDetailed(gin.H{"resysDictionary": sysDictionary}, "search successful", c)
 	}
 }
 
@@ -103,14 +104,14 @@ func GetSysDictionaryList(c *gin.Context) {
 		return
 	}
 	if err, list, total := service.GetSysDictionaryInfoList(pageInfo); err != nil {
-		global.GVA_LOG.Error("获取失败!", zap.Any("err", err))
-		response.FailWithMessage("获取失败", c)
+		global.GVA_LOG.Error("Acquisition failure!", zap.Any("err", err))
+		response.FailWithMessage("Acquisition failure", c)
 	} else {
 		response.OkWithDetailed(response.PageResult{
 			List:     list,
 			Total:    total,
 			Page:     pageInfo.Page,
 			PageSize: pageInfo.PageSize,
-		}, "获取成功", c)
+		}, "Get successful", c)
 	}
 }

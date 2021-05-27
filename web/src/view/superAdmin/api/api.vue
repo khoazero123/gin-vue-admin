@@ -2,17 +2,17 @@
   <div>
     <div class="search-term">
       <el-form :inline="true" :model="searchInfo" class="demo-form-inline">
-        <el-form-item label="路径">
-          <el-input placeholder="路径" v-model="searchInfo.path"></el-input>
+        <el-form-item label="path">
+          <el-input placeholder="path" v-model="searchInfo.path"></el-input>
         </el-form-item>
-        <el-form-item label="描述">
-          <el-input placeholder="描述" v-model="searchInfo.description"></el-input>
+        <el-form-item label="description">
+          <el-input placeholder="description" v-model="searchInfo.description"></el-input>
         </el-form-item>
-        <el-form-item label="api组">
-          <el-input placeholder="api组" v-model="searchInfo.apiGroup"></el-input>
+        <el-form-item label="API">
+          <el-input placeholder="API" v-model="searchInfo.apiGroup"></el-input>
         </el-form-item>
-        <el-form-item label="请求">
-          <el-select clearable placeholder="请选择" v-model="searchInfo.method">
+        <el-form-item label="request">
+          <el-select clearable placeholder="please choose" v-model="searchInfo.method">
             <el-option
               :key="item.value"
               :label="`${item.label}(${item.value})`"
@@ -22,19 +22,19 @@
           </el-select>
         </el-form-item>
         <el-form-item>
-          <el-button @click="onSubmit" type="primary">查询</el-button>
+          <el-button @click="onSubmit" type="primary">Inquire</el-button>
         </el-form-item>
         <el-form-item>
-          <el-button @click="openDialog('addApi')" type="primary">新增api</el-button>
+          <el-button @click="openDialog('addApi')" type="primary">New API</el-button>
         </el-form-item>
         <el-form-item>
           <el-popover placement="top" v-model="deleteVisible" width="160">
-            <p>确定要删除吗？</p>
+            <p>You sure you want to delete it?</p>
               <div style="text-align: right; margin: 0">
-                <el-button @click="deleteVisible = false" size="mini" type="text">取消</el-button>
-                <el-button @click="onDelete" size="mini" type="primary">确定</el-button>
+                <el-button @click="deleteVisible = false" size="mini" type="text">cancel</el-button>
+                <el-button @click="onDelete" size="mini" type="primary">determine</el-button>
               </div>
-            <el-button icon="el-icon-delete" size="mini" slot="reference" type="danger">批量删除</el-button>
+            <el-button icon="el-icon-delete" size="mini" slot="reference" type="danger">batch deletion</el-button>
           </el-popover>
         </el-form-item>
       </el-form>
@@ -45,10 +45,10 @@
         width="55">
       </el-table-column>
       <el-table-column label="id" min-width="60" prop="ID" sortable="custom"></el-table-column>
-      <el-table-column label="api路径" min-width="150" prop="path" sortable="custom"></el-table-column>
-      <el-table-column label="api分组" min-width="150" prop="apiGroup" sortable="custom"></el-table-column>
-      <el-table-column label="api简介" min-width="150" prop="description" sortable="custom"></el-table-column>
-      <el-table-column label="请求" min-width="150" prop="method" sortable="custom">
+      <el-table-column label="API path" min-width="150" prop="path" sortable="custom"></el-table-column>
+      <el-table-column label="API group" min-width="150" prop="apiGroup" sortable="custom"></el-table-column>
+      <el-table-column label="Introduction to API" min-width="150" prop="description" sortable="custom"></el-table-column>
+      <el-table-column label="request" min-width="150" prop="method" sortable="custom">
         <template slot-scope="scope">
           <div>
             {{scope.row.method}}
@@ -63,15 +63,15 @@
         </template>
       </el-table-column>
 
-      <el-table-column fixed="right" label="操作" width="200">
+      <el-table-column fixed="right" label="operating" width="200">
         <template slot-scope="scope">
-          <el-button @click="editApi(scope.row)" size="small" type="primary" icon="el-icon-edit">编辑</el-button>
+          <el-button @click="editApi(scope.row)" size="small" type="primary" icon="el-icon-edit">edit</el-button>
           <el-button
             @click="deleteApi(scope.row)"
             size="small"
             type="danger"
             icon="el-icon-delete"
-          >删除</el-button>
+          >delete</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -88,11 +88,11 @@
 
     <el-dialog :before-close="closeDialog" :title="dialogTitle" :visible.sync="dialogFormVisible">
       <el-form :inline="true" :model="form" :rules="rules" label-width="80px" ref="apiForm">
-        <el-form-item label="路径" prop="path">
+        <el-form-item label="path" prop="path">
           <el-input autocomplete="off" v-model="form.path"></el-input>
         </el-form-item>
-        <el-form-item label="请求" prop="method">
-          <el-select placeholder="请选择" v-model="form.method">
+        <el-form-item label="request" prop="method">
+          <el-select placeholder="please choose" v-model="form.method">
             <el-option
               :key="item.value"
               :label="`${item.label}(${item.value})`"
@@ -101,17 +101,17 @@
             ></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="api分组" prop="apiGroup">
+        <el-form-item label="API group" prop="apiGroup">
           <el-input autocomplete="off" v-model="form.apiGroup"></el-input>
         </el-form-item>
-        <el-form-item label="api简介" prop="description">
+        <el-form-item label="Introduction to API" prop="description">
           <el-input autocomplete="off" v-model="form.description"></el-input>
         </el-form-item>
       </el-form>
-      <div class="warning">新增Api需要在角色管理内配置权限才可使用</div>
+      <div class="warning">New API needs to configure permissions within role management.</div>
       <div class="dialog-footer" slot="footer">
-        <el-button @click="closeDialog">取 消</el-button>
-        <el-button @click="enterDialog" type="primary">确 定</el-button>
+        <el-button @click="closeDialog">Take</el-button>
+        <el-button @click="enterDialog" type="primary">Confirm</el-button>
       </div>
     </el-dialog>
   </div>
@@ -119,7 +119,7 @@
 
 
 <script>
-// 获取列表内容封装在mixins内部  getTableData方法 初始化已封装完成 条件搜索时候 请把条件安好后台定制的结构体字段 放到 this.searchInfo 中即可实现条件搜索
+// Get List Content Package In Mixins Internal GetTableData Method Initialization Package Completed Condition Search, place the conditional sector in this.SearchInfo when you are searched.
 
 import {
   getApiById,
@@ -134,22 +134,22 @@ import { toSQLLine } from "@/utils/stringFun";
 const methodOptions = [
   {
     value: "POST",
-    label: "创建",
+    label: "create",
     type: "success"
   },
   {
     value: "GET",
-    label: "查看",
+    label: "Check",
     type: ""
   },
   {
     value: "PUT",
-    label: "更新",
+    label: "Update",
     type: "warning"
   },
   {
     value: "DELETE",
-    label: "删除",
+    label: "delete",
     type: "danger"
   }
 ];
@@ -162,7 +162,7 @@ export default {
       deleteVisible:false,
       listApi: getApiList,
       dialogFormVisible: false,
-      dialogTitle: "新增Api",
+      dialogTitle: "New API",
       apis:[],
       form: {
         path: "",
@@ -173,21 +173,21 @@ export default {
       methodOptions: methodOptions,
       type: "",
       rules: {
-        path: [{ required: true, message: "请输入api路径", trigger: "blur" }],
+        path: [{ required: true, message: "Please enter an API path", trigger: "blur" }],
         apiGroup: [
-          { required: true, message: "请输入组名称", trigger: "blur" }
+          { required: true, message: "Please enter the group name", trigger: "blur" }
         ],
         method: [
-          { required: true, message: "请选择请求方式", trigger: "blur" }
+          { required: true, message: "Please select a request method", trigger: "blur" }
         ],
         description: [
-          { required: true, message: "请输入api介绍", trigger: "blur" }
+          { required: true, message: "Please enter the API introduction", trigger: "blur" }
         ]
       }
     };
   },
   methods: {
-    //  选中api
+    //  Select API
       handleSelectionChange(val) {
         this.apis = val;
       },
@@ -206,7 +206,7 @@ export default {
           this.getTableData()
         }
       },
-    // 排序
+    // Sort
     sortChange({ prop, order }) {
       if (prop) {
         this.searchInfo.orderKey = toSQLLine(prop);
@@ -214,7 +214,7 @@ export default {
       }
       this.getTableData();
     },
-    //条件搜索前端看此方法
+    //Condition Search Front End View this method
     onSubmit() {
       this.page = 1;
       this.pageSize = 10;
@@ -236,10 +236,10 @@ export default {
     openDialog(type) {
       switch (type) {
         case "addApi":
-          this.dialogTitle = "新增Api";
+          this.dialogTitle = "New API";
           break;
         case "edit":
-          this.dialogTitle = "编辑Api";
+          this.dialogTitle = "Edit API";
           break;
         default:
           break;
@@ -253,9 +253,9 @@ export default {
       this.openDialog("edit");
     },
     async deleteApi(row) {
-      this.$confirm("此操作将永久删除所有角色下该api, 是否继续?", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
+      this.$confirm("This action will permanently delete the API under all roles, is it?", "Tips", {
+        confirmButtonText: "determine",
+        cancelButtonText: "cancel",
         type: "warning"
       })
         .then(async () => {
@@ -263,7 +263,7 @@ export default {
           if (res.code == 0) {
             this.$message({
               type: "success",
-              message: "删除成功!"
+              message: "successfully deleted!"
             });
             if (this.tableData.length == 1 && this.page > 1 ) {
               this.page--;
@@ -274,7 +274,7 @@ export default {
         .catch(() => {
           this.$message({
             type: "info",
-            message: "已取消删除"
+            message: "Delete"
           });
         });
     },
@@ -288,7 +288,7 @@ export default {
                 if (res.code == 0) {
                   this.$message({
                     type: "success",
-                    message: "添加成功",
+                    message: "Added successfully",
                     showClose: true
                   });
                 }
@@ -303,7 +303,7 @@ export default {
                 if (res.code == 0) {
                   this.$message({
                     type: "success",
-                    message: "编辑成功",
+                    message: "Editor success",
                     showClose: true
                   });
                 }
@@ -315,7 +315,7 @@ export default {
               {
                 this.$message({
                   type: "error",
-                  message: "未知操作",
+                  message: "Unknown operation",
                   showClose: true
                 });
               }

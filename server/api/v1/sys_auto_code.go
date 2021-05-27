@@ -94,10 +94,10 @@ func GetTables(c *gin.Context) {
 	dbName := c.DefaultQuery("dbName", global.GVA_CONFIG.Mysql.Dbname)
 	err, tables := service.GetTables(dbName)
 	if err != nil {
-		global.GVA_LOG.Error("查询table失败!", zap.Any("err", err))
-		response.FailWithMessage("查询table失败", c)
+		global.GVA_LOG.Error("Query Table failed!", zap.Any("err", err))
+		response.FailWithMessage("Query Table failed", c)
 	} else {
-		response.OkWithDetailed(gin.H{"tables": tables}, "获取成功", c)
+		response.OkWithDetailed(gin.H{"tables": tables}, "Get successful", c)
 	}
 }
 
@@ -110,10 +110,10 @@ func GetTables(c *gin.Context) {
 // @Router /autoCode/getDatabase [get]
 func GetDB(c *gin.Context) {
 	if err, dbs := service.GetDB(); err != nil {
-		global.GVA_LOG.Error("获取失败!", zap.Any("err", err))
-		response.FailWithMessage("获取失败", c)
+		global.GVA_LOG.Error("Acquisition failure!", zap.Any("err", err))
+		response.FailWithMessage("Acquisition failure", c)
 	} else {
-		response.OkWithDetailed(gin.H{"dbs": dbs}, "获取成功", c)
+		response.OkWithDetailed(gin.H{"dbs": dbs}, "Get successful", c)
 	}
 }
 
@@ -128,9 +128,9 @@ func GetColumn(c *gin.Context) {
 	dbName := c.DefaultQuery("dbName", global.GVA_CONFIG.Mysql.Dbname)
 	tableName := c.Query("tableName")
 	if err, columns := service.GetColumn(tableName, dbName); err != nil {
-		global.GVA_LOG.Error("获取失败!", zap.Any("err", err))
-		response.FailWithMessage("获取失败", c)
+		global.GVA_LOG.Error("Acquisition failure!", zap.Any("err", err))
+		response.FailWithMessage("Acquisition failure", c)
 	} else {
-		response.OkWithDetailed(gin.H{"columns": columns}, "获取成功", c)
+		response.OkWithDetailed(gin.H{"columns": columns}, "Get successful", c)
 	}
 }

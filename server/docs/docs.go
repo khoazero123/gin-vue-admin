@@ -1788,7 +1788,7 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "{\"success\":true,\"data\":{},\"msg\":\"查询成功\"}",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"search successful\"}",
                         "schema": {
                             "type": "string"
                         }
@@ -1809,7 +1809,7 @@ var doc = `{
                 "tags": [
                     "SimpleUploader"
                 ],
-                "summary": "合并文件",
+                "summary": "Merged file",
                 "parameters": [
                     {
                         "type": "string",
@@ -1821,7 +1821,7 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "{\"success\":true,\"data\":{},\"msg\":\"合并成功\"}",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"Successful\"}",
                         "schema": {
                             "type": "string"
                         }
@@ -1957,10 +1957,10 @@ var doc = `{
                 "tags": [
                     "SysDictionary"
                 ],
-                "summary": "用id查询SysDictionary",
+                "summary": "Use ID query sysDictionary",
                 "parameters": [
                     {
-                        "description": "ID或字典英名",
+                        "description": "ID or dictionary",
                         "name": "data",
                         "in": "body",
                         "required": true,
@@ -1971,7 +1971,7 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "{\"success\":true,\"data\":{},\"msg\":\"查询成功\"}",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"search successful\"}",
                         "schema": {
                             "type": "string"
                         }
@@ -2147,10 +2147,10 @@ var doc = `{
                 "tags": [
                     "SysDictionaryDetail"
                 ],
-                "summary": "用id查询SysDictionaryDetail",
+                "summary": "Query SysDictionaryDetail with IDDictionaryDetail",
                 "parameters": [
                     {
-                        "description": "用id查询SysDictionaryDetail",
+                        "description": "Query SysDictionaryDetail with IDDictionaryDetail",
                         "name": "data",
                         "in": "body",
                         "required": true,
@@ -2161,7 +2161,7 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "{\"success\":true,\"data\":{},\"msg\":\"查询成功\"}",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"search successful\"}",
                         "schema": {
                             "type": "string"
                         }
@@ -2375,7 +2375,7 @@ var doc = `{
                 "tags": [
                     "SysOperationRecord"
                 ],
-                "summary": "用id查询SysOperationRecord",
+                "summary": "Use ID Query SysoperationRecord",
                 "parameters": [
                     {
                         "description": "Id",
@@ -2389,7 +2389,7 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "{\"success\":true,\"data\":{},\"msg\":\"查询成功\"}",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"search successful\"}",
                         "schema": {
                             "type": "string"
                         }

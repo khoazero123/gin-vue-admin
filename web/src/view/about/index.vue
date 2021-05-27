@@ -83,7 +83,6 @@
               :unique-year="true"
               :show-day-and-month="true"
               order="desc"
-              dateLocale="zh-CN"
             />
           </div>
           <el-button class="load-more" @click="loadMore" type="text"

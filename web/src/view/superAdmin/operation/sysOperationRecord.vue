@@ -2,26 +2,26 @@
   <div>
     <div class="search-term">
       <el-form :inline="true" :model="searchInfo" class="demo-form-inline">
-        <el-form-item label="请求方法">
-          <el-input placeholder="搜索条件" v-model="searchInfo.method"></el-input>
+        <el-form-item label="Request method">
+          <el-input placeholder="search condition" v-model="searchInfo.method"></el-input>
         </el-form-item>
-        <el-form-item label="请求路径">
-          <el-input placeholder="搜索条件" v-model="searchInfo.path"></el-input>
+        <el-form-item label="Request path">
+          <el-input placeholder="search condition" v-model="searchInfo.path"></el-input>
         </el-form-item>
-        <el-form-item label="结果状态码">
-          <el-input placeholder="搜索条件" v-model="searchInfo.status"></el-input>
+        <el-form-item label="Result status code">
+          <el-input placeholder="search condition" v-model="searchInfo.status"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button @click="onSubmit" type="primary">查询</el-button>
+          <el-button @click="onSubmit" type="primary">Inquire</el-button>
         </el-form-item>
         <el-form-item>
           <el-popover placement="top" v-model="deleteVisible" width="160">
-            <p>确定要删除吗？</p>
+            <p>You sure you want to delete it?</p>
             <div style="text-align: right; margin: 0">
-              <el-button @click="deleteVisible = false" size="mini" type="text">取消</el-button>
-              <el-button @click="onDelete" size="mini" type="primary">确定</el-button>
+              <el-button @click="deleteVisible = false" size="mini" type="text">cancel</el-button>
+              <el-button @click="onDelete" size="mini" type="primary">determine</el-button>
             </div>
-            <el-button icon="el-icon-delete" size="mini" slot="reference" type="danger">批量删除</el-button>
+            <el-button icon="el-icon-delete" size="mini" slot="reference" type="danger">batch deletion</el-button>
           </el-popover>
         </el-form-item>
       </el-form>
@@ -36,15 +36,15 @@
       tooltip-effect="dark"
     >
       <el-table-column type="selection" width="55"></el-table-column>
-      <el-table-column label="操作人" width="140">
+      <el-table-column label="Operator" width="140">
         <template slot-scope="scope">
           <div>{{scope.row.user.userName}}({{scope.row.user.nickName}})</div>
         </template>
       </el-table-column>
-      <el-table-column label="日期" width="180">
+      <el-table-column label="date" width="180">
         <template slot-scope="scope">{{scope.row.CreatedAt|formatDate}}</template>
       </el-table-column>
-      <el-table-column label="状态码" prop="status" width="120">
+      <el-table-column label="status code" prop="status" width="120">
         <template slot-scope="scope">
           <div>
             <el-tag type="success">{{ scope.row.status }}</el-tag>
@@ -64,11 +64,11 @@
               <i class="el-icon-view" slot="reference"></i>
             </el-popover>
 
-            <span v-else>无</span>
+            <span v-else>no</span>
           </div>
         </template>
       </el-table-column>
-      <el-table-column label="响应" prop="path" width="80">
+      <el-table-column label="response" prop="path" width="80">
         <template slot-scope="scope">
           <div>
             <el-popover placement="top-start" trigger="hover" v-if="scope.row.resp">
@@ -77,19 +77,19 @@
               </div>
               <i class="el-icon-view" slot="reference"></i>
             </el-popover>
-            <span v-else>无</span>
+            <span v-else>no</span>
           </div>
         </template>
       </el-table-column>
       <el-table-column label="按钮组">
         <template slot-scope="scope">
           <el-popover placement="top" v-model="scope.row.visible" width="160">
-            <p>确定要删除吗？</p>
+            <p>You sure you want to delete it?</p>
             <div style="text-align: right; margin: 0">
-              <el-button @click="scope.row.visible = false" size="mini" type="text">取消</el-button>
-              <el-button @click="deleteSysOperationRecord(scope.row)" size="mini" type="primary">确定</el-button>
+              <el-button @click="scope.row.visible = false" size="mini" type="text">cancel</el-button>
+              <el-button @click="deleteSysOperationRecord(scope.row)" size="mini" type="primary">determine</el-button>
             </div>
-            <el-button icon="el-icon-delete" size="mini" slot="reference" type="danger">删除</el-button>
+            <el-button icon="el-icon-delete" size="mini" slot="reference" type="danger">delete</el-button>
           </el-popover>
         </template>
       </el-table-column>
@@ -112,7 +112,7 @@ import {
   deleteSysOperationRecord,
   getSysOperationRecordList,
   deleteSysOperationRecordByIds
-} from "@/api/sysOperationRecord"; //  此处请自行替换地址
+} from "@/api/sysOperationRecord"; //  Please replace the address here
 import { formatTimeToStr } from "@/utils/date";
 import infoList from "@/mixins/infoList";
 
@@ -149,14 +149,14 @@ export default {
     },
     formatBoolean: function(bool) {
       if (bool != null) {
-        return bool ? "是" : "否";
+        return bool ? "Yes" : "no";
       } else {
         return "";
       }
     }
   },
   methods: {
-    //条件搜索前端看此方法
+    //Condition Search Front End View this method
     onSubmit() {
       this.page = 1;
       this.pageSize = 10;
@@ -175,7 +175,7 @@ export default {
       if (res.code == 0) {
         this.$message({
           type: "success",
-          message: "删除成功"
+          message: "successfully deleted"
         });
         if (this.tableData.length == ids.length && this.page > 1) {
           this.page--;
@@ -190,7 +190,7 @@ export default {
       if (res.code == 0) {
         this.$message({
           type: "success",
-          message: "删除成功"
+          message: "successfully deleted"
         });
         if (this.tableData.length == 1 && this.page > 1 ) {
           this.page--;

@@ -6,6 +6,7 @@ import (
 	"gin-vue-admin/model/response"
 	"gin-vue-admin/service"
 	"gin-vue-admin/utils"
+
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 )
@@ -48,7 +49,7 @@ func SimpleUploaderUpload(c *gin.Context) {
 		response.FailWithMessage("切片创建失败", c)
 		return
 	} else {
-		response.OkWithMessage("切片创建成功", c)
+		response.OkWithMessage("Slice creation success", c)
 	}
 }
 
@@ -63,13 +64,13 @@ func CheckFileMd5(c *gin.Context) {
 	md5 := c.Query("md5")
 	err, chunks, isDone := service.CheckFileMd5(md5)
 	if err != nil {
-		global.GVA_LOG.Error("md5读取失败!", zap.Any("err", err))
-		response.FailWithMessage("md5读取失败", c)
+		global.GVA_LOG.Error("MD5 reading failed!", zap.Any("err", err))
+		response.FailWithMessage("MD5 reading failed", c)
 	} else {
 		response.OkWithDetailed(gin.H{
 			"chunks": chunks,
 			"isDone": isDone,
-		}, "查询成功", c)
+		}, "search successful", c)
 	}
 }
 
@@ -85,9 +86,9 @@ func MergeFileMd5(c *gin.Context) {
 	fileName := c.Query("fileName")
 	err := service.MergeFileMd5(md5, fileName)
 	if err != nil {
-		global.GVA_LOG.Error("md5读取失败!", zap.Any("err", err))
-		response.FailWithMessage("md5读取失败", c)
+		global.GVA_LOG.Error("MD5 reading failed!", zap.Any("err", err))
+		response.FailWithMessage("MD5 reading failed", c)
 	} else {
-		response.OkWithMessage("合并成功", c)
+		response.OkWithMessage("Successful", c)
 	}
 }

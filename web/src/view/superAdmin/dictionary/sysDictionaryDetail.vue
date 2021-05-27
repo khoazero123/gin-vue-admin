@@ -2,23 +2,23 @@
   <div>
     <div class="search-term">
       <el-form :inline="true" :model="searchInfo" class="demo-form-inline">
-        <el-form-item label="展示值">
-          <el-input placeholder="搜索条件" v-model="searchInfo.label"></el-input>
+        <el-form-item label="Display value">
+          <el-input placeholder="search condition" v-model="searchInfo.label"></el-input>
         </el-form-item>
-        <el-form-item label="字典值">
-          <el-input placeholder="搜索条件" v-model="searchInfo.value"></el-input>
+        <el-form-item label="Dictionary value">
+          <el-input placeholder="search condition" v-model="searchInfo.value"></el-input>
         </el-form-item>
-        <el-form-item label="启用状态" prop="status">
-          <el-select v-model="searchInfo.status" placeholder="请选择">
-            <el-option key="true" label="是" value="true"></el-option>
-            <el-option key="false" label="否" value="false"></el-option>
+        <el-form-item label="Enable state" prop="status">
+          <el-select v-model="searchInfo.status" placeholder="please choose">
+            <el-option key="true" label="Yes" value="true"></el-option>
+            <el-option key="false" label="no" value="false"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item>
-          <el-button @click="onSubmit" type="primary">查询</el-button>
+          <el-button @click="onSubmit" type="primary">Inquire</el-button>
         </el-form-item>
         <el-form-item>
-          <el-button @click="openDialog" type="primary">新增字典项</el-button>
+          <el-button @click="openDialog" type="primary">New word type</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -31,30 +31,30 @@
       tooltip-effect="dark"
     >
       <el-table-column type="selection" width="55"></el-table-column>
-      <el-table-column label="日期" width="180">
+      <el-table-column label="date" width="180">
         <template slot-scope="scope">{{scope.row.CreatedAt|formatDate}}</template>
       </el-table-column>
 
-      <el-table-column label="展示值" prop="label" width="120"></el-table-column>
+      <el-table-column label="Display value" prop="label" width="120"></el-table-column>
 
-      <el-table-column label="字典值" prop="value" width="120"></el-table-column>
+      <el-table-column label="Dictionary value" prop="value" width="120"></el-table-column>
 
-      <el-table-column label="启用状态" prop="status" width="120">
+      <el-table-column label="Enable state" prop="status" width="120">
         <template slot-scope="scope">{{scope.row.status|formatBoolean}}</template>
       </el-table-column>
 
-      <el-table-column label="排序标记" prop="sort" width="120"></el-table-column>
+      <el-table-column label="Sort tag" prop="sort" width="120"></el-table-column>
 
-      <el-table-column label="按钮组">
+      <el-table-column label="Button group">
         <template slot-scope="scope">
-          <el-button @click="updateSysDictionaryDetail(scope.row)" size="small" type="primary">变更</el-button>
+          <el-button @click="updateSysDictionaryDetail(scope.row)" size="small" type="primary">change</el-button>
           <el-popover placement="top" width="160" v-model="scope.row.visible">
-            <p>确定要删除吗？</p>
+            <p>You sure you want to delete it?</p>
             <div style="text-align: right; margin: 0">
-              <el-button size="mini" type="text" @click="scope.row.visible = false">取消</el-button>
-              <el-button type="primary" size="mini" @click="deleteSysDictionaryDetail(scope.row)">确定</el-button>
+              <el-button size="mini" type="text" @click="scope.row.visible = false">cancel</el-button>
+              <el-button type="primary" size="mini" @click="deleteSysDictionaryDetail(scope.row)">determine</el-button>
             </div>
-            <el-button type="danger" icon="el-icon-delete" size="mini" slot="reference">删除</el-button>
+            <el-button type="danger" icon="el-icon-delete" size="mini" slot="reference">delete</el-button>
           </el-popover>
         </template>
       </el-table-column>
@@ -71,36 +71,36 @@
       layout="total, sizes, prev, pager, next, jumper"
     ></el-pagination>
 
-    <el-dialog :before-close="closeDialog" :visible.sync="dialogFormVisible" title="弹窗操作">
+    <el-dialog :before-close="closeDialog" :visible.sync="dialogFormVisible" title="Pop-up operation">
       <el-form ref="elForm" :model="formData" :rules="rules" size="medium" label-width="110px">
-        <el-form-item label="展示值" prop="label">
+        <el-form-item label="Display value" prop="label">
           <el-input
             v-model="formData.label"
-            placeholder="请输入展示值"
+            placeholder="Please enter the display value"
             clearable
             :style="{width: '100%'}"
           ></el-input>
         </el-form-item>
-        <el-form-item label="字典值" prop="value">
+        <el-form-item label="Dictionary value" prop="value">
           <el-input-number
             v-model.number="formData.value"
             step-strictly
             :step="1"
-            placeholder="请输入字典值"
+            placeholder="Please enter a dictionary value"
             clearable
             :style="{width: '100%'}"
           ></el-input-number>
         </el-form-item>
-        <el-form-item label="启用状态" prop="status" required>
-          <el-switch v-model="formData.status" active-text="开启" inactive-text="停用"></el-switch>
+        <el-form-item label="Enable state" prop="status" required>
+          <el-switch v-model="formData.status" active-text="Open" inactive-text="Deactivate"></el-switch>
         </el-form-item>
-        <el-form-item label="排序标记" prop="sort">
-          <el-input-number v-model.number="formData.sort" placeholder="排序标记"></el-input-number>
+        <el-form-item label="Sort tag" prop="sort">
+          <el-input-number v-model.number="formData.sort" placeholder="Sort tag"></el-input-number>
         </el-form-item>
       </el-form>
       <div class="dialog-footer" slot="footer">
-        <el-button @click="closeDialog">取 消</el-button>
-        <el-button @click="enterDialog" type="primary">确 定</el-button>
+        <el-button @click="closeDialog">Take</el-button>
+        <el-button @click="enterDialog" type="primary">Confirm</el-button>
       </div>
     </el-dialog>
   </div>
@@ -113,7 +113,7 @@ import {
   updateSysDictionaryDetail,
   findSysDictionaryDetail,
   getSysDictionaryDetailList
-} from "@/api/sysDictionaryDetail"; //  此处请自行替换地址
+} from "@/api/sysDictionaryDetail"; //  Please replace the address here
 import { formatTimeToStr } from "@/utils/date";
 import infoList from "@/mixins/infoList";
 
@@ -135,21 +135,21 @@ export default {
         label: [
           {
             required: true,
-            message: "请输入展示值",
+            message: "Please enter the display value",
             trigger: "blur"
           }
         ],
         value: [
           {
             required: true,
-            message: "请输入字典值",
+            message: "Please enter a dictionary value",
             trigger: "blur"
           }
         ],
         sort: [
           {
             required: true,
-            message: "排序标记",
+            message: "Sort tag",
             trigger: "blur"
           }
         ]
@@ -167,14 +167,14 @@ export default {
     },
     formatBoolean: function(bool) {
       if (bool != null) {
-        return bool ? "是" : "否";
+        return bool ? "Yes" : "no";
       } else {
         return "";
       }
     }
   },
   methods: {
-    //条件搜索前端看此方法
+    //Condition Search Front End View this method
     onSubmit() {
       this.page = 1;
       this.pageSize = 10;
@@ -207,7 +207,7 @@ export default {
       if (res.code == 0) {
         this.$message({
           type: "success",
-          message: "删除成功"
+          message: "successfully deleted"
         });
         if (this.tableData.length == 1 && this.page > 1 ) {
           this.page--;
@@ -234,7 +234,7 @@ export default {
         if (res.code == 0) {
           this.$message({
             type: "success",
-            message: "创建/更改成功"
+            message: "Create / change success"
           });
           this.closeDialog();
           this.getTableData();

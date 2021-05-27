@@ -1771,7 +1771,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "{\"success\":true,\"data\":{},\"msg\":\"查询成功\"}",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"search successful\"}",
                         "schema": {
                             "type": "string"
                         }
@@ -1940,7 +1940,7 @@
                 "tags": [
                     "SysDictionary"
                 ],
-                "summary": "用id查询SysDictionary",
+                "summary": "Use ID query sysDictionary",
                 "parameters": [
                     {
                         "description": "ID或字典英名",
