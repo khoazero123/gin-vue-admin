@@ -3,7 +3,7 @@
     <div class="search-term">
       <el-form :inline="true" :model="searchInfo" class="demo-form-inline">
         <el-form-item>
-          <el-button @click="openDialog" type="primary">新增客户</el-button>
+          <el-button @click="openDialog" type="primary">New customer</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -16,22 +16,22 @@
       tooltip-effect="dark"
     >
       <el-table-column type="selection" width="55"></el-table-column>
-      <el-table-column label="接入日期" width="180">
+      <el-table-column label="Access date" width="180">
         <template slot-scope="scope">{{ scope.row.CreatedAt|formatDate }}</template>
       </el-table-column>
-      <el-table-column label="姓名" prop="customerName" width="120"></el-table-column>
-      <el-table-column label="电话" prop="customerPhoneData" width="120"></el-table-column>
-      <el-table-column label="接入人ID" prop="sysUserId" width="120"></el-table-column>
-      <el-table-column label="按钮组" min-width="160">
+      <el-table-column label="Name" prop="customerName" width="120"></el-table-column>
+      <el-table-column label="Phone" prop="customerPhoneData" width="120"></el-table-column>
+      <el-table-column label="Access person ID" prop="sysUserId" width="120"></el-table-column>
+      <el-table-column label="Button group" min-width="160">
         <template slot-scope="scope">
-          <el-button @click="updateCustomer(scope.row)" size="small" type="text">变更</el-button>
+          <el-button @click="updateCustomer(scope.row)" size="small" type="text">change</el-button>
           <el-popover placement="top" width="160" v-model="scope.row.visible">
-            <p>确定要删除吗？</p>
+            <p>You sure you want to delete it?</p>
             <div style="text-align: right; margin: 0">
-              <el-button size="mini" type="text" @click="scope.row.visible = false">取消</el-button>
-              <el-button type="primary" size="mini" @click="deleteCustomer(scope.row)">确定</el-button>
+              <el-button size="mini" type="text" @click="scope.row.visible = false">cancel</el-button>
+              <el-button type="primary" size="mini" @click="deleteCustomer(scope.row)">determine</el-button>
             </div>
-            <el-button type="danger" icon="el-icon-delete" size="mini" slot="reference">删除</el-button>
+            <el-button type="danger" icon="el-icon-delete" size="mini" slot="reference">delete</el-button>
           </el-popover>
         </template>
       </el-table-column>
@@ -48,21 +48,21 @@
       layout="total, sizes, prev, pager, next, jumper"
     ></el-pagination>
 
-    <el-dialog :before-close="closeDialog" :visible.sync="dialogFormVisible" title="客户">
+    <el-dialog :before-close="closeDialog" :visible.sync="dialogFormVisible" title="client">
       <el-form :inline="true" :model="form" label-width="80px">
-        <el-form-item label="客户名">
+        <el-form-item label="Customer name">
           <el-input autocomplete="off" v-model="form.customerName"></el-input>
         </el-form-item>
-        <el-form-item label="客户电话">
+        <el-form-item label="Client phone">
           <el-input autocomplete="off" v-model="form.customerPhoneData"></el-input>
         </el-form-item>
       </el-form>
       <div class="dialog-footer" slot="footer">
-        <el-button @click="closeDialog">取 消</el-button>
-        <el-button @click="enterDialog" type="primary">确 定</el-button>
+        <el-button @click="closeDialog">Take</el-button>
+        <el-button @click="enterDialog" type="primary">Confirm</el-button>
       </div>
     </el-dialog>
-    <div class="tips">在资源权限中将此角色的资源权限清空 或者不包含创建者的角色 即可屏蔽此客户资源的显示</div>
+    <div class="tips">In the resource permission, the resource permission of this role is emptied or does not include the display of this customer resource.</div>
   </div>
 </template>
 

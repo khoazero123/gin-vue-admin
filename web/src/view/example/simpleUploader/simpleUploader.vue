@@ -11,8 +11,8 @@
   >
     <uploader-unsupport></uploader-unsupport>
     <uploader-drop>
-      <p>拖拽文件至此或点击</p>
-      <uploader-btn>选择文件</uploader-btn>
+      <p>Drag and drop files or click</p>
+      <uploader-btn>Select a document</uploader-btn>
     </uploader-drop>
     <uploader-list></uploader-list>
   </uploader>
@@ -20,7 +20,7 @@
 
 <script>
 var notUploadedChunks = []; // 已经上传过的文件chunkNumber数组
-var isUploaded = false; // 文件已经上传成功了
+var isUploaded = false; // The file has been uploaded successfully.
 import { mapGetters } from "vuex";
 import { checkFileMd5,mergeFileMd5 } from "@/api/simpleUploader";
 import SparkMD5 from "spark-md5";
@@ -36,11 +36,11 @@ export default {
     ...mapGetters("user", ["userInfo", "token"]),
     statusText() {
       return {
-        success: "成功了",
-        error: "出错了",
-        uploading: "上传中",
-        paused: "暂停中",
-        waiting: "等待中"
+        success: "Successful",
+        error: "Error",
+        uploading: "Uploading",
+        paused: "Paused",
+        waiting: "Waiting"
       };
     },
     options() {
@@ -55,9 +55,9 @@ export default {
         },
         checkChunkUploadedByResponse(chunk) {
           if (isUploaded) {
-            return true; // return true 会忽略当前文件，不会再发送给后台
+            return true; // return true Will ignore the current file, will not be sent to the background
           } else {
-              // 根据已经上传过的切片来进行忽略
+              // Ignore according to the slice that has been uploaded.
               return (
                 notUploadedChunks &&
                 notUploadedChunks.some(
@@ -70,16 +70,15 @@ export default {
     }
   },
   methods: {
-
-    // 上传单个文件
+    // Upload a single file
     fileAdded(file) {
-      this.computeMD5(file); // 生成MD5
+      this.computeMD5(file); // Generate MD5
     },
-    // 计算MD5值
+    // Calculate MD5 value
     computeMD5(file) {
       var that = this;
-      isUploaded = false; // 这个文件是否已经上传成功过
-      notUploadedChunks = []; // 未成功的chunkNumber
+      isUploaded = false; // Whether this file has been uploaded
+      notUploadedChunks = []; // Unsuccessful Chunknumber
       var fileReader = new FileReader();
       var md5 = "";
 
@@ -100,10 +99,10 @@ export default {
           const res = await checkFileMd5({ md5: md5 });
           if (res.code == 0) {
             if (res.data.isDone) {
-              // 上传成功过
+              // Upload success
               isUploaded = true;
               that.$message({
-                message: "该文件已经上传成功过了，秒传成功。",
+                message: "The file has been successfully uploaded, and the second is successful.",
                 type: "success"
               });
 
@@ -122,14 +121,14 @@ export default {
       };
       fileReader.onerror = function() {
         this.error(
-          "generater md5 时FileReader异步读取文件出错了，FileReader onerror was triggered, maybe the browser aborted due to high memory usage."
+          "When Generate MD5, FileReader reads files.，FileReader onerror was triggered, maybe the browser aborted due to high memory usage."
         );
         return false;
       };
     },
-    // 上传进度
+    // Upload progress
     onFileProgress() {},
-    // 上传成功
+    // Upload success
     async onFileSuccess(rootFile, file) {
       await mergeFileMd5({md5:file.uniqueIdentifier,fileName:file.name})
     },

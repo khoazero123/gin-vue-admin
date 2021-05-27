@@ -142,7 +142,7 @@ export default {
           color: "#ff85c0",
         },
         {
-          label: "about Us",
+          label: "About Us",
           icon: "el-icon el-icon-user",
           name: "about",
           color: "#5cdbd3",

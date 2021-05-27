@@ -51,7 +51,7 @@ func ParseExcel2InfoList() ([]model.SysBaseMenu, error) {
 				skipHeader = false
 				continue
 			} else {
-				return nil, errors.New("Excel格式错误")
+				return nil, errors.New("Excel wrong format")
 			}
 		}
 		if len(row) != len(fixedHeader) {

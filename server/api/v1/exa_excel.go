@@ -6,12 +6,13 @@ import (
 	"gin-vue-admin/model/response"
 	"gin-vue-admin/service"
 	"gin-vue-admin/utils"
+
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 )
 
-// /excel/importExcel 接口，与upload接口作用类似，只是把文件存到resource/excel目录下，用于导入Excel时存放Excel文件(ExcelImport.xlsx)
-// /excel/loadExcel接口，用于读取resource/excel目录下的文件((ExcelImport.xlsx)并加载为[]model.SysBaseMenu类型的示例数据
+// /excel/importExcel Interface, similar to the UPLOAD interface, just save the file resource/excel In the directory, save an Excel file when importing Excel(ExcelImport.xlsx)
+// /excel/loadExcel Interface for reading resource/excel File in the directory((ExcelImport.xlsx) And loaded as []model.SysBaseMenu类型的示例数据
 // /excel/exportExcel 接口，用于读取前端传来的tableData，生成Excel文件并返回
 // /excel/downloadTemplate 接口，用于下载resource/excel目录下的 ExcelTemplate.xlsx 文件，作为导入的模板
 
@@ -29,11 +30,11 @@ func ExportExcel(c *gin.Context) {
 	filePath := global.GVA_CONFIG.Excel.Dir + excelInfo.FileName
 	err := service.ParseInfoList2Excel(excelInfo.InfoList, filePath)
 	if err != nil {
-		global.GVA_LOG.Error("转换Excel失败!", zap.Any("err", err))
-		response.FailWithMessage("转换Excel失败", c)
+		global.GVA_LOG.Error("Conversion Excel failed!", zap.Any("err", err))
+		response.FailWithMessage("Conversion Excel failed", c)
 		return
 	}
-	c.Writer.Header().Add("success", "true")
+	c.Writer.Header().Add("Success", "true")
 	c.File(filePath)
 }
 
@@ -65,8 +66,8 @@ func ImportExcel(c *gin.Context) {
 func LoadExcel(c *gin.Context) {
 	menus, err := service.ParseExcel2InfoList()
 	if err != nil {
-		global.GVA_LOG.Error("加载数据失败", zap.Any("err", err))
-		response.FailWithMessage("加载数据失败", c)
+		global.GVA_LOG.Error("Load data failed", zap.Any("err", err))
+		response.FailWithMessage("Load data failed", c)
 		return
 	}
 	response.OkWithDetailed(response.PageResult{
@@ -74,7 +75,7 @@ func LoadExcel(c *gin.Context) {
 		Total:    int64(len(menus)),
 		Page:     1,
 		PageSize: 999,
-	}, "加载数据成功", c)
+	}, "Load data success", c)
 }
 
 // @Tags excel

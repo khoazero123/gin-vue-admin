@@ -1,14 +1,14 @@
 <template>
   <div class="hello">
-     <el-divider content-position="left">大文件上传</el-divider>
+     <el-divider content-position="left">Big file upload</el-divider>
     <form id="fromCont" method="post" >
       <div class="fileUpload" @click="inputChange">
-        选择文件
+        Select a document
         <input v-show="false"  @change="choseFile" id="file" multiple="multiple" type="file" ref="Input"  />
       </div>
     </form>
-     <el-button @click="getFile" :disabled="limitFileSize" type="primary" size="medium" class="uploadBtn">上传文件</el-button>
-    <div class="el-upload__tip">请上传不超过5MB的文件</div>
+     <el-button @click="getFile" :disabled="limitFileSize" type="primary" size="medium" class="uploadBtn">upload files</el-button>
+    <div class="el-upload__tip">Please upload no more than 5MB files</div>
     <div class="list">
       <transition  name="list" tag="p">
         <div class="list-item" v-if="file" >
@@ -22,7 +22,7 @@
      <!-- <span
       v-if="this.file"
     >{{Math.floor(((this.formDataList.length-this.waitNum)/this.formDataList.length)*100)}}%</span> -->
-    <div class="tips">此版本为先行体验功能测试版，样式美化和性能优化正在进行中，上传切片文件和合成的完整文件分别再QMPlusserver目录的breakpointDir文件夹和fileDir文件夹</div>
+    <div class="tips">This version is the first experience function beta, style beautification, and performance optimization is in progress, upload sliced files and synthetic full files separately QMPLUSSERVER directory BreakPointDir folders and FileDir folders</div>
   </div>
 </template>
 <script>
@@ -52,7 +52,7 @@ export default {
    
   },
   methods: {
-    // 选中文件的函数
+    // Select the function of the file
     async choseFile(e) {
       const fileR = new FileReader() // 创建一个reader用来读取文件流
       const file = e.target.files[0] // 获取当前文件
@@ -68,10 +68,10 @@ export default {
         spark.append(blob) // 文件流丢进工具
         this.fileMd5 = spark.end() // 工具结束 产生一个a 总文件的md5
         const FileSliceCap = 1 * 1024 * 1024 // 分片字节数
-        let start = 0 // 定义分片开始切的地方
-        let end = 0 // 每片结束切的地方a
-        let i = 0 // 第几片
-        this.formDataList = [] // 分片存储的一个池子 丢全局
+        let start = 0 // Define fragmentation to start cutting
+        let end = 0 // Each piece is cut into place A
+        let i = 0 // Second
+        this.formDataList = [] // Piece of fragmentation is lost
         while (end < file.size) {
           // 当结尾数字大于文件总size的时候 结束切片
           start = i * FileSliceCap // 计算每片开始位置
@@ -109,50 +109,50 @@ export default {
       }
       } else {
          this.limitFileSize = true
-         this.$message('请上传小于5M文件')
+         this.$message('Please upload less than 5m files')
       }
     },
     getFile() {
-      // 确定按钮
+      // Confirm button
       if (this.file == null) {
-        this.$message('请先上传文件')
+        this.$message('Please upload the file first')
         return
       }
       this.percentage = Math.floor(((this.formDataList.length-this.waitNum)/this.formDataList.length)*100)
       if(this.percentage == 100){
         this.percentageFlage = false
       }
-      this.sliceFile() // 上传切片
+      this.sliceFile() // Upload slice
     },
     sliceFile() {
       this.waitUpLoad &&
         this.waitUpLoad.map(item => {
-          //需要上传的切片
-          item.formData.append('chunkTotal', this.formDataList.length) // 切片总数携带给后台 总有用的
-          const fileR = new FileReader() // 功能同上
+          //Need to upload the slice
+          item.formData.append('chunkTotal', this.formDataList.length) // The total number of slits is carried to the background.
+          const fileR = new FileReader() // Functionally
           const file = item.formData.get('file')
           fileR.readAsArrayBuffer(file)
           fileR.onload = e => {
             let spark = new SparkMD5.ArrayBuffer()
             spark.append(e.target.result)
-            item.formData.append('chunkMd5', spark.end()) // 获取当前切片md5 后端用于验证切片完整性
+            item.formData.append('chunkMd5', spark.end()) // Get the current slice MD5 rear end for verifying the finish
             this.upLoadFileSlice(item)
           }
         })
     },
     async upLoadFileSlice(item) {
-      // 切片上传
+      // Sliced upload
       await axios.post(process.env.VUE_APP_BASE_API+"/fileUploadAndDownload/breakpointContinue",item.formData)
-      this.waitNum-- // 百分数增加
+      this.waitNum-- // Percentage
       if (this.waitNum == 0) {
-        // 切片传完以后 合成文件
+        // Sliced files after passing
         const params = {
           fileName: this.file.name,
           fileMd5: this.fileMd5
         }
         const res = await breakpointContinueFinish(params)
         if (res.success) {
-          // 合成文件过后 删除缓存切片
+          // After the synthesis file, remove the cache slice
           const params = {
             fileName: this.file.name,
             fileMd5: this.fileMd5,
