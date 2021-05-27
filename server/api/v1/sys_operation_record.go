@@ -24,10 +24,10 @@ func CreateSysOperationRecord(c *gin.Context) {
 	var sysOperationRecord model.SysOperationRecord
 	_ = c.ShouldBindJSON(&sysOperationRecord)
 	if err := service.CreateSysOperationRecord(sysOperationRecord); err != nil {
-		global.GVA_LOG.Error("创建失败!", zap.Any("err", err))
-		response.FailWithMessage("创建失败", c)
+		global.GVA_LOG.Error("Creation failed!", zap.Any("err", err))
+		response.FailWithMessage("Creation failed", c)
 	} else {
-		response.OkWithMessage("创建成功", c)
+		response.OkWithMessage("Create success", c)
 	}
 }
 
@@ -37,16 +37,16 @@ func CreateSysOperationRecord(c *gin.Context) {
 // @accept application/json
 // @Produce application/json
 // @Param data body model.SysOperationRecord true "SysOperationRecord模型"
-// @Success 200 {string} string "{"success":true,"data":{},"msg":"删除成功"}"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"Successfully deleted"}"
 // @Router /sysOperationRecord/deleteSysOperationRecord [delete]
 func DeleteSysOperationRecord(c *gin.Context) {
 	var sysOperationRecord model.SysOperationRecord
 	_ = c.ShouldBindJSON(&sysOperationRecord)
 	if err := service.DeleteSysOperationRecord(sysOperationRecord); err != nil {
-		global.GVA_LOG.Error("删除失败!", zap.Any("err", err))
-		response.FailWithMessage("删除失败", c)
+		global.GVA_LOG.Error("Failed to delete!", zap.Any("err", err))
+		response.FailWithMessage("Failed to delete", c)
 	} else {
-		response.OkWithMessage("删除成功", c)
+		response.OkWithMessage("Successfully deleted", c)
 	}
 }
 
@@ -62,10 +62,10 @@ func DeleteSysOperationRecordByIds(c *gin.Context) {
 	var IDS request.IdsReq
 	_ = c.ShouldBindJSON(&IDS)
 	if err := service.DeleteSysOperationRecordByIds(IDS); err != nil {
-		global.GVA_LOG.Error("批量删除失败!", zap.Any("err", err))
-		response.FailWithMessage("批量删除失败", c)
+		global.GVA_LOG.Error("Batch deletion failed!", zap.Any("err", err))
+		response.FailWithMessage("Batch deletion failed", c)
 	} else {
-		response.OkWithMessage("批量删除成功", c)
+		response.OkWithMessage("Batch delete success", c)
 	}
 }
 
@@ -104,14 +104,14 @@ func GetSysOperationRecordList(c *gin.Context) {
 	var pageInfo request.SysOperationRecordSearch
 	_ = c.ShouldBindQuery(&pageInfo)
 	if err, list, total := service.GetSysOperationRecordInfoList(pageInfo); err != nil {
-		global.GVA_LOG.Error("获取失败!", zap.Any("err", err))
-		response.FailWithMessage("获取失败", c)
+		global.GVA_LOG.Error("Acquisition failure!", zap.Any("err", err))
+		response.FailWithMessage("Acquisition failure", c)
 	} else {
 		response.OkWithDetailed(response.PageResult{
 			List:     list,
 			Total:    total,
 			Page:     pageInfo.Page,
 			PageSize: pageInfo.PageSize,
-		}, "获取成功", c)
+		}, "Get successful", c)
 	}
 }

@@ -39,15 +39,15 @@ func PreviewTemp(autoCode model.AutoCodeStruct) (map[string]string, error) {
 		return nil, err
 	}
 
-	// 写入文件前，先创建文件夹
+	// Create a folder before writing a file
 	if err = utils.CreateDir(needMkdir...); err != nil {
 		return nil, err
 	}
 
-	// 创建map
+	// Create MAP
 	ret := make(map[string]string)
 
-	// 生成map
+	// Map
 	for _, value := range dataList {
 		ext := ""
 		if ext = filepath.Ext(value.autoCodePath); ext == ".txt" {
@@ -84,7 +84,7 @@ func PreviewTemp(autoCode model.AutoCodeStruct) (map[string]string, error) {
 		_ = f.Close()
 
 	}
-	defer func() { // 移除中间文件
+	defer func() { // Remove intermediate file
 		if err := os.RemoveAll(autoPath); err != nil {
 			return
 		}
@@ -103,12 +103,12 @@ func CreateTemp(autoCode model.AutoCodeStruct) (err error) {
 	if err != nil {
 		return err
 	}
-	// 写入文件前，先创建文件夹
+	// Create a folder before writing a file
 	if err = utils.CreateDir(needMkdir...); err != nil {
 		return err
 	}
 
-	// 生成文件
+	// Generate files
 	for _, value := range dataList {
 		f, err := os.OpenFile(value.autoCodePath, os.O_CREATE|os.O_WRONLY, 0755)
 		if err != nil {
@@ -120,16 +120,16 @@ func CreateTemp(autoCode model.AutoCodeStruct) (err error) {
 		_ = f.Close()
 	}
 
-	defer func() { // 移除中间文件
+	defer func() { // Remove intermediate file
 		if err := os.RemoveAll(autoPath); err != nil {
 			return
 		}
 	}()
-	if autoCode.AutoMoveFile { // 判断是否需要自动转移
+	if autoCode.AutoMoveFile { // Judging whether it is necessary to automatically transfer
 		for index, _ := range dataList {
 			addAutoMoveFile(&dataList[index])
 		}
-		for _, value := range dataList { // 移动文件
+		for _, value := range dataList { // Mobile file
 			if err := utils.FileMove(value.autoCodePath, value.autoMoveFilePath); err != nil {
 				return err
 			}
@@ -151,7 +151,7 @@ func CreateTemp(autoCode model.AutoCodeStruct) (err error) {
 				_ = utils.Reload()
 			}()
 		}
-		return errors.New("创建代码成功并移动文件成功")
+		return errors.New("Creating code successfully and moving files successfully")
 	} else { // 打包
 		if err := utils.ZipFiles("./ginvueadmin.zip", fileList, ".", "."); err != nil {
 			return err
@@ -275,37 +275,37 @@ func AutoCreateApi(a *model.AutoCodeStruct) (err error) {
 	var apiList = []model.SysApi{
 		{
 			Path:        "/" + a.Abbreviation + "/" + "create" + a.StructName,
-			Description: "新增" + a.Description,
+			Description: "Add new " + a.Description,
 			ApiGroup:    a.Abbreviation,
 			Method:      "POST",
 		},
 		{
 			Path:        "/" + a.Abbreviation + "/" + "delete" + a.StructName,
-			Description: "删除" + a.Description,
+			Description: "Delete " + a.Description,
 			ApiGroup:    a.Abbreviation,
 			Method:      "DELETE",
 		},
 		{
 			Path:        "/" + a.Abbreviation + "/" + "delete" + a.StructName + "ByIds",
-			Description: "批量删除" + a.Description,
+			Description: "Batch deletion " + a.Description,
 			ApiGroup:    a.Abbreviation,
 			Method:      "DELETE",
 		},
 		{
 			Path:        "/" + a.Abbreviation + "/" + "update" + a.StructName,
-			Description: "更新" + a.Description,
+			Description: "Update " + a.Description,
 			ApiGroup:    a.Abbreviation,
 			Method:      "PUT",
 		},
 		{
 			Path:        "/" + a.Abbreviation + "/" + "find" + a.StructName,
-			Description: "根据ID获取" + a.Description,
+			Description: "Acquisition according to ID " + a.Description,
 			ApiGroup:    a.Abbreviation,
 			Method:      "GET",
 		},
 		{
 			Path:        "/" + a.Abbreviation + "/" + "get" + a.StructName + "List",
-			Description: "获取" + a.Description + "列表",
+			Description: "Obtain " + a.Description + " List",
 			ApiGroup:    a.Abbreviation,
 			Method:      "GET",
 		},
@@ -314,7 +314,7 @@ func AutoCreateApi(a *model.AutoCodeStruct) (err error) {
 		for _, v := range apiList {
 			var api model.SysApi
 			if errors.Is(tx.Where("path = ? AND method = ?", v.Path, v.Method).First(&api).Error, gorm.ErrRecordNotFound) {
-				if err := tx.Create(&v).Error; err != nil { // 遇到错误时回滚事务
+				if err := tx.Create(&v).Error; err != nil { // Magnification
 					return err
 				}
 			}
@@ -325,31 +325,31 @@ func AutoCreateApi(a *model.AutoCodeStruct) (err error) {
 }
 
 func getNeedList(autoCode *model.AutoCodeStruct) (dataList []tplData, fileList []string, needMkdir []string, err error) {
-	// 去除所有空格
+	// Remove all spaces
 	utils.TrimSpace(autoCode)
 	for _, field := range autoCode.Fields {
 		utils.TrimSpace(field)
 	}
-	// 获取 basePath 文件夹下所有tpl文件
+	// Get all TPL files under the basepath folder
 	tplFileList, err := GetAllTplFile(basePath, nil)
 	if err != nil {
 		return nil, nil, nil, err
 	}
 	dataList = make([]tplData, 0, len(tplFileList))
 	fileList = make([]string, 0, len(tplFileList))
-	needMkdir = make([]string, 0, len(tplFileList)) // 当文件夹下存在多个tpl文件时，改为map更合理
-	// 根据文件路径生成 tplData 结构体，待填充数据
+	needMkdir = make([]string, 0, len(tplFileList)) // When there is a plurality of TPL files in the folder, change to MAP is more reasonable.
+	// Generate a TPLDATA structure according to the file path, to be filled with data
 	for _, value := range tplFileList {
 		dataList = append(dataList, tplData{locationPath: value})
 	}
-	// 生成 *Template, 填充 template 字段
+	// Generate * Template, populate the template field
 	for index, value := range dataList {
 		dataList[index].template, err = template.ParseFiles(value.locationPath)
 		if err != nil {
 			return nil, nil, nil, err
 		}
 	}
-	// 生成文件路径，填充 autoCodePath 字段，readme.txt.tpl不符合规则，需要特殊处理
+	// Generate file paths, fill the autocodePath field, readme.txt.tpl does not meet the rules, need special processing
 	// resource/template/web/api.js.tpl -> autoCode/web/autoCode.PackageName/api/autoCode.PackageName.js
 	// resource/template/readme.txt.tpl -> autoCode/readme.txt
 	autoPath := "autoCode/"

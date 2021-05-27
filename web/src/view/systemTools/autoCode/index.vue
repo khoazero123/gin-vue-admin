@@ -45,25 +45,25 @@
     <el-divider></el-divider>
     <!-- Initial version Automation Code Tool -->
     <el-form ref="autoCodeForm" :rules="rules" :model="form" label-width="120px" :inline="true">
-      <el-form-item label="Struct Name" prop="structName">
+      <el-form-item label="ClassName" prop="structName">
         <el-input v-model="form.structName" placeholder="First letter automatic conversion capital"></el-input>
       </el-form-item>
-      <el-form-item label="tableName" prop="tableName">
+      <el-form-item label="Table name" prop="tableName">
         <el-input v-model="form.tableName" placeholder="Specify a table name (non-required)"></el-input>
       </el-form-item>
-      <el-form-item label="Struct" prop="abbreviation">
+      <el-form-item label="Route name" prop="abbreviation">
         <el-input v-model="form.abbreviation" placeholder="Abbreviation will be used as an entrance to object name and routing group"></el-input>
       </el-form-item>
-      <el-form-item label="Struct Chinese name" prop="description">
+      <el-form-item label="Description" prop="description">
         <el-input v-model="form.description" placeholder="Chinese description as an automatic API description"></el-input>
       </el-form-item>
-      <el-form-item label="file name" prop="packageName">
+      <el-form-item label="Package name" prop="packageName">
         <el-input v-model="form.packageName" placeholder="The default name for generating files"></el-input>
       </el-form-item>
       <el-form-item label="Automatically create an API">
         <el-checkbox v-model="form.autoCreateApiToSql"></el-checkbox>
       </el-form-item>
-      <el-form-item label="Automatic mobile file">
+      <el-form-item label="Automatic move file">
         <el-checkbox v-model="form.autoMoveFile"></el-checkbox>
       </el-form-item>
     </el-form>
@@ -74,7 +74,7 @@
     <el-table :data="form.fields" border stripe>
       <el-table-column type="index" label="sequence" width="100"></el-table-column>
       <el-table-column prop="fieldName" label="FIELD name"></el-table-column>
-      <el-table-column prop="fieldDesc" label="Chinese name"></el-table-column>
+      <el-table-column prop="fieldDesc" label="Field description"></el-table-column>
       <el-table-column prop="fieldJson" label="FieldJson"></el-table-column>
       <el-table-column prop="fieldType" label="Field data type" width="130"></el-table-column>
       <el-table-column prop="dataType" label="Database field type" width="130"></el-table-column>
@@ -186,7 +186,7 @@ export default {
           { required: true, message: "Please enter the structure name", trigger: "blur" }
         ],
         abbreviation: [
-          { required: true, message: "Please enter the structure", trigger: "blur" }
+          { required: true, message: "Please enter the structure [a-zA-Z]", trigger: "blur", pattern: /[a-zA-Z]/ }
         ],
         description: [
           { required: true, message: "Please enter a structure description", trigger: "blur" }
@@ -281,7 +281,7 @@ export default {
       }
       this.$refs.autoCodeForm.validate(async valid => {
         if (valid) {
-          this.form.structName = toUpperCase(this.form.structName);
+          this.form.structName = toUpperCase(this.form.structName).replace(/\s/g, '');
           if (this.form.structName == this.form.abbreviation) {
             this.$message({
               type: "error",

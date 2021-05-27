@@ -23,7 +23,7 @@ export const createSysDictionary = (data) => {
 // @accept application/json
 // @Produce application/json
 // @Param data body model.SysDictionary true "删除SysDictionary"
-// @Success 200 {string} string "{"success":true,"data":{},"msg":"删除成功"}"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"Successfully deleted"}"
 // @Router /sysDictionary/deleteSysDictionary [delete]
  export const deleteSysDictionary = (data) => {
      return service({

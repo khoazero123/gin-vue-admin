@@ -32,21 +32,21 @@ func SimpleUploaderUpload(c *gin.Context) {
 	hasDir, _ := utils.PathExists(chunkDir)
 	if !hasDir {
 		if err := utils.CreateDir(chunkDir); err != nil {
-			global.GVA_LOG.Error("创建目录失败!", zap.Any("err", err))
+			global.GVA_LOG.Error("Create a directory failed!", zap.Any("err", err))
 		}
 	}
 	chunkPath := chunkDir + chunk.Filename + chunk.ChunkNumber
 	err = c.SaveUploadedFile(header, chunkPath)
 	if err != nil {
-		global.GVA_LOG.Error("切片创建失败!", zap.Any("err", err))
-		response.FailWithMessage("切片创建失败", c)
+		global.GVA_LOG.Error("Slice creation failed!", zap.Any("err", err))
+		response.FailWithMessage("Slice creation failed", c)
 		return
 	}
 	chunk.CurrentChunkPath = chunkPath
 	err = service.SaveChunk(chunk)
 	if err != nil {
-		global.GVA_LOG.Error("切片创建失败!", zap.Any("err", err))
-		response.FailWithMessage("切片创建失败", c)
+		global.GVA_LOG.Error("Slice creation failed!", zap.Any("err", err))
+		response.FailWithMessage("Slice creation failed", c)
 		return
 	} else {
 		response.OkWithMessage("Slice creation success", c)

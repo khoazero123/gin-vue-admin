@@ -175,7 +175,7 @@ func GetUserList(c *gin.Context) {
 			Total:    total,
 			Page:     pageInfo.Page,
 			PageSize: pageInfo.PageSize,
-		}, "获取成功", c)
+		}, "Get successful", c)
 	}
 }
 
@@ -195,10 +195,10 @@ func SetUserAuthority(c *gin.Context) {
 		return
 	}
 	if err := service.SetUserAuthority(sua.UUID, sua.AuthorityId); err != nil {
-		global.GVA_LOG.Error("修改失败", zap.Any("err", err))
-		response.FailWithMessage("修改失败", c)
+		global.GVA_LOG.Error("Fail to edit", zap.Any("err", err))
+		response.FailWithMessage("Fail to edit", c)
 	} else {
-		response.OkWithMessage("修改成功", c)
+		response.OkWithMessage("Successfully modified", c)
 	}
 }
 
@@ -208,7 +208,7 @@ func SetUserAuthority(c *gin.Context) {
 // @accept application/json
 // @Produce application/json
 // @Param data body request.GetById true "用户ID"
-// @Success 200 {string} string "{"success":true,"data":{},"msg":"删除成功"}"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"Successfully deleted"}"
 // @Router /user/deleteUser [delete]
 func DeleteUser(c *gin.Context) {
 	var reqId request.GetById
@@ -219,14 +219,14 @@ func DeleteUser(c *gin.Context) {
 	}
 	jwtId := getUserID(c)
 	if jwtId == uint(reqId.ID) {
-		response.FailWithMessage("删除失败, 自杀失败", c)
+		response.FailWithMessage("Failed to delete, Suicide failure", c)
 		return
 	}
 	if err := service.DeleteUser(reqId.ID); err != nil {
-		global.GVA_LOG.Error("删除失败!", zap.Any("err", err))
-		response.FailWithMessage("删除失败", c)
+		global.GVA_LOG.Error("Failed to delete!", zap.Any("err", err))
+		response.FailWithMessage("Failed to delete", c)
 	} else {
-		response.OkWithMessage("删除成功", c)
+		response.OkWithMessage("Successfully deleted", c)
 	}
 }
 
@@ -246,17 +246,17 @@ func SetUserInfo(c *gin.Context) {
 		return
 	}
 	if err, ReqUser := service.SetUserInfo(user); err != nil {
-		global.GVA_LOG.Error("设置失败", zap.Any("err", err))
-		response.FailWithMessage("设置失败", c)
+		global.GVA_LOG.Error("Setup failed", zap.Any("err", err))
+		response.FailWithMessage("Setup failed", c)
 	} else {
-		response.OkWithDetailed(gin.H{"userInfo": ReqUser}, "设置成功", c)
+		response.OkWithDetailed(gin.H{"userInfo": ReqUser}, "Set success", c)
 	}
 }
 
 // 从Gin的Context中获取从jwt解析出来的用户ID
 func getUserID(c *gin.Context) uint {
 	if claims, exists := c.Get("claims"); !exists {
-		global.GVA_LOG.Error("从Gin的Context中获取从jwt解析出来的用户ID失败, 请检查路由是否使用jwt中间件")
+		global.GVA_LOG.Error("Get the user ID of the user ID from JWT from the Context failure, check if the route uses JWT middleware")
 		return 0
 	} else {
 		waitUse := claims.(*request.CustomClaims)
@@ -267,7 +267,7 @@ func getUserID(c *gin.Context) uint {
 // 从Gin的Context中获取从jwt解析出来的用户UUID
 func getUserUuid(c *gin.Context) string {
 	if claims, exists := c.Get("claims"); !exists {
-		global.GVA_LOG.Error("从Gin的Context中获取从jwt解析出来的用户UUID失败, 请检查路由是否使用jwt中间件")
+		global.GVA_LOG.Error("Get the user uuid from jwt resolution fails from the Context of GIN, please check if the route uses JWT middleware")
 		return ""
 	} else {
 		waitUse := claims.(*request.CustomClaims)
@@ -278,7 +278,7 @@ func getUserUuid(c *gin.Context) string {
 // 从Gin的Context中获取从jwt解析出来的用户角色id
 func getUserAuthorityId(c *gin.Context) string {
 	if claims, exists := c.Get("claims"); !exists {
-		global.GVA_LOG.Error("从Gin的Context中获取从jwt解析出来的用户UUID失败, 请检查路由是否使用jwt中间件")
+		global.GVA_LOG.Error("Get the user uuid from jwt resolution fails from the Context of GIN, please check if the route uses JWT middleware")
 		return ""
 	} else {
 		waitUse := claims.(*request.CustomClaims)

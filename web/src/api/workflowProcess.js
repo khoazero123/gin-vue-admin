@@ -23,7 +23,7 @@ export const createWorkflowProcess = (data) => {
 // @accept application/json
 // @Produce application/json
 // @Param data body model.WorkflowProcess true "删除WorkflowProcess"
-// @Success 200 {string} string "{"success":true,"data":{},"msg":"删除成功"}"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"Successfully deleted"}"
 // @Router /workflowProcess/deleteWorkflowProcess [delete]
 export const deleteWorkflowProcess = (data) => {
     return service({
@@ -39,7 +39,7 @@ export const deleteWorkflowProcess = (data) => {
 // @accept application/json
 // @Produce application/json
 // @Param data body request.IdsReq true "批量删除WorkflowProcess"
-// @Success 200 {string} string "{"success":true,"data":{},"msg":"删除成功"}"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"Successfully deleted"}"
 // @Router /workflowProcess/deleteWorkflowProcess [delete]
 export const deleteWorkflowProcessByIds = (data) => {
     return service({

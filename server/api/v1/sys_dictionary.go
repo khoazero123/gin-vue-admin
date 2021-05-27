@@ -24,10 +24,10 @@ func CreateSysDictionary(c *gin.Context) {
 	var dictionary model.SysDictionary
 	_ = c.ShouldBindJSON(&dictionary)
 	if err := service.CreateSysDictionary(dictionary); err != nil {
-		global.GVA_LOG.Error("创建失败!", zap.Any("err", err))
-		response.FailWithMessage("创建失败", c)
+		global.GVA_LOG.Error("Creation failed!", zap.Any("err", err))
+		response.FailWithMessage("Creation failed", c)
 	} else {
-		response.OkWithMessage("创建成功", c)
+		response.OkWithMessage("Create success", c)
 	}
 }
 
@@ -37,16 +37,16 @@ func CreateSysDictionary(c *gin.Context) {
 // @accept application/json
 // @Produce application/json
 // @Param data body model.SysDictionary true "SysDictionary模型"
-// @Success 200 {string} string "{"success":true,"data":{},"msg":"删除成功"}"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"Successfully deleted"}"
 // @Router /sysDictionary/deleteSysDictionary [delete]
 func DeleteSysDictionary(c *gin.Context) {
 	var dictionary model.SysDictionary
 	_ = c.ShouldBindJSON(&dictionary)
 	if err := service.DeleteSysDictionary(dictionary); err != nil {
-		global.GVA_LOG.Error("删除失败!", zap.Any("err", err))
-		response.FailWithMessage("删除失败", c)
+		global.GVA_LOG.Error("Failed to delete!", zap.Any("err", err))
+		response.FailWithMessage("Failed to delete", c)
 	} else {
-		response.OkWithMessage("删除成功", c)
+		response.OkWithMessage("Successfully deleted", c)
 	}
 }
 
@@ -62,10 +62,10 @@ func UpdateSysDictionary(c *gin.Context) {
 	var dictionary model.SysDictionary
 	_ = c.ShouldBindJSON(&dictionary)
 	if err := service.UpdateSysDictionary(&dictionary); err != nil {
-		global.GVA_LOG.Error("更新失败!", zap.Any("err", err))
-		response.FailWithMessage("更新失败", c)
+		global.GVA_LOG.Error("Update failed!", zap.Any("err", err))
+		response.FailWithMessage("Update failed", c)
 	} else {
-		response.OkWithMessage("更新成功", c)
+		response.OkWithMessage("Update completed", c)
 	}
 }
 

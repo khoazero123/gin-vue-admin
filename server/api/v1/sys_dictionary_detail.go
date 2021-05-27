@@ -24,10 +24,10 @@ func CreateSysDictionaryDetail(c *gin.Context) {
 	var detail model.SysDictionaryDetail
 	_ = c.ShouldBindJSON(&detail)
 	if err := service.CreateSysDictionaryDetail(detail); err != nil {
-		global.GVA_LOG.Error("创建失败!", zap.Any("err", err))
-		response.FailWithMessage("创建失败", c)
+		global.GVA_LOG.Error("Creation failed!", zap.Any("err", err))
+		response.FailWithMessage("Creation failed", c)
 	} else {
-		response.OkWithMessage("创建成功", c)
+		response.OkWithMessage("Create success", c)
 	}
 }
 
@@ -37,16 +37,16 @@ func CreateSysDictionaryDetail(c *gin.Context) {
 // @accept application/json
 // @Produce application/json
 // @Param data body model.SysDictionaryDetail true "SysDictionaryDetail模型"
-// @Success 200 {string} string "{"success":true,"data":{},"msg":"删除成功"}"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"Successfully deleted"}"
 // @Router /sysDictionaryDetail/deleteSysDictionaryDetail [delete]
 func DeleteSysDictionaryDetail(c *gin.Context) {
 	var detail model.SysDictionaryDetail
 	_ = c.ShouldBindJSON(&detail)
 	if err := service.DeleteSysDictionaryDetail(detail); err != nil {
-		global.GVA_LOG.Error("删除失败!", zap.Any("err", err))
-		response.FailWithMessage("删除失败", c)
+		global.GVA_LOG.Error("Failed to delete!", zap.Any("err", err))
+		response.FailWithMessage("Failed to delete", c)
 	} else {
-		response.OkWithMessage("删除成功", c)
+		response.OkWithMessage("Successfully deleted", c)
 	}
 }
 
@@ -62,10 +62,10 @@ func UpdateSysDictionaryDetail(c *gin.Context) {
 	var detail model.SysDictionaryDetail
 	_ = c.ShouldBindJSON(&detail)
 	if err := service.UpdateSysDictionaryDetail(&detail); err != nil {
-		global.GVA_LOG.Error("更新失败!", zap.Any("err", err))
-		response.FailWithMessage("更新失败", c)
+		global.GVA_LOG.Error("Update failed!", zap.Any("err", err))
+		response.FailWithMessage("Update failed", c)
 	} else {
-		response.OkWithMessage("更新成功", c)
+		response.OkWithMessage("Update completed", c)
 	}
 }
 
@@ -104,14 +104,14 @@ func GetSysDictionaryDetailList(c *gin.Context) {
 	var pageInfo request.SysDictionaryDetailSearch
 	_ = c.ShouldBindQuery(&pageInfo)
 	if err, list, total := service.GetSysDictionaryDetailInfoList(pageInfo); err != nil {
-		global.GVA_LOG.Error("获取失败!", zap.Any("err", err))
-		response.FailWithMessage("获取失败", c)
+		global.GVA_LOG.Error("Acquisition failure!", zap.Any("err", err))
+		response.FailWithMessage("Acquisition failure", c)
 	} else {
 		response.OkWithDetailed(response.PageResult{
 			List:     list,
 			Total:    total,
 			Page:     pageInfo.Page,
 			PageSize: pageInfo.PageSize,
-		}, "获取成功", c)
+		}, "Get successful", c)
 	}
 }

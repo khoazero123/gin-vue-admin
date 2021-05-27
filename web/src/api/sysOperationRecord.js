@@ -6,7 +6,7 @@ import service from '@/utils/request'
 // @accept application/json
 // @Produce application/json
 // @Param data body model.SysOperationRecord true "删除SysOperationRecord"
-// @Success 200 {string} string "{"success":true,"data":{},"msg":"删除成功"}"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"Successfully deleted"}"
 // @Router /sysOperationRecord/deleteSysOperationRecord [delete]
 export const deleteSysOperationRecord = (data) => {
     return service({
@@ -22,7 +22,7 @@ export const deleteSysOperationRecord = (data) => {
 // @accept application/json
 // @Produce application/json
 // @Param data body request.IdsReq true "删除SysOperationRecord"
-// @Success 200 {string} string "{"success":true,"data":{},"msg":"删除成功"}"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"Successfully deleted"}"
 // @Router /sysOperationRecord/deleteSysOperationRecord [delete]
 export const deleteSysOperationRecordByIds = (data) => {
     return service({

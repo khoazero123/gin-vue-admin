@@ -124,7 +124,7 @@ func AddBaseMenu(c *gin.Context) {
 // @accept application/json
 // @Produce application/json
 // @Param data body request.GetById true "菜单id"
-// @Success 200 {string} string "{"success":true,"data":{},"msg":"删除成功"}"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"Successfully deleted"}"
 // @Router /menu/deleteBaseMenu [post]
 func DeleteBaseMenu(c *gin.Context) {
 	var menu request.GetById
@@ -134,10 +134,10 @@ func DeleteBaseMenu(c *gin.Context) {
 		return
 	}
 	if err := service.DeleteBaseMenu(menu.ID); err != nil {
-		global.GVA_LOG.Error("删除失败!", zap.Any("err", err))
-		response.FailWithMessage("删除失败", c)
+		global.GVA_LOG.Error("Failed to delete!", zap.Any("err", err))
+		response.FailWithMessage("Failed to delete", c)
 	} else {
-		response.OkWithMessage("删除成功", c)
+		response.OkWithMessage("Successfully deleted", c)
 	}
 }
 

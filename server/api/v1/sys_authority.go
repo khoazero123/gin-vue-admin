@@ -7,6 +7,7 @@ import (
 	"gin-vue-admin/model/response"
 	"gin-vue-admin/service"
 	"gin-vue-admin/utils"
+
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 )
@@ -27,10 +28,10 @@ func CreateAuthority(c *gin.Context) {
 		return
 	}
 	if err, authBack := service.CreateAuthority(authority); err != nil {
-		global.GVA_LOG.Error("创建失败!", zap.Any("err", err))
-		response.FailWithMessage("创建失败"+err.Error(), c)
+		global.GVA_LOG.Error("Creation failed!", zap.Any("err", err))
+		response.FailWithMessage("Creation failed"+err.Error(), c)
 	} else {
-		response.OkWithDetailed(response.SysAuthorityResponse{Authority: authBack}, "创建成功", c)
+		response.OkWithDetailed(response.SysAuthorityResponse{Authority: authBack}, "Create success", c)
 	}
 }
 
@@ -54,10 +55,10 @@ func CopyAuthority(c *gin.Context) {
 		return
 	}
 	if err, authBack := service.CopyAuthority(copyInfo); err != nil {
-		global.GVA_LOG.Error("拷贝失败!", zap.Any("err", err))
-		response.FailWithMessage("拷贝失败"+err.Error(), c)
+		global.GVA_LOG.Error("Copy failure!", zap.Any("err", err))
+		response.FailWithMessage("Copy failure"+err.Error(), c)
 	} else {
-		response.OkWithDetailed(response.SysAuthorityResponse{Authority: authBack}, "拷贝成功", c)
+		response.OkWithDetailed(response.SysAuthorityResponse{Authority: authBack}, "Copy success", c)
 	}
 }
 
@@ -67,7 +68,7 @@ func CopyAuthority(c *gin.Context) {
 // @accept application/json
 // @Produce application/json
 // @Param data body model.SysAuthority true "删除角色"
-// @Success 200 {string} string "{"success":true,"data":{},"msg":"删除成功"}"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"Successfully deleted"}"
 // @Router /authority/deleteAuthority [post]
 func DeleteAuthority(c *gin.Context) {
 	var authority model.SysAuthority
@@ -76,11 +77,11 @@ func DeleteAuthority(c *gin.Context) {
 		response.FailWithMessage(err.Error(), c)
 		return
 	}
-	if err := service.DeleteAuthority(&authority); err != nil { // 删除角色之前需要判断是否有用户正在使用此角色
-		global.GVA_LOG.Error("删除失败!", zap.Any("err", err))
-		response.FailWithMessage("删除失败"+err.Error(), c)
+	if err := service.DeleteAuthority(&authority); err != nil { // Remove the role before you need to judge whether the user is using this role
+		global.GVA_LOG.Error("Failed to delete!", zap.Any("err", err))
+		response.FailWithMessage("Failed to delete"+err.Error(), c)
 	} else {
-		response.OkWithMessage("删除成功", c)
+		response.OkWithMessage("Successfully deleted", c)
 	}
 }
 
@@ -100,10 +101,10 @@ func UpdateAuthority(c *gin.Context) {
 		return
 	}
 	if err, authority := service.UpdateAuthority(auth); err != nil {
-		global.GVA_LOG.Error("更新失败!", zap.Any("err", err))
-		response.FailWithMessage("更新失败"+err.Error(), c)
+		global.GVA_LOG.Error("Update failed!", zap.Any("err", err))
+		response.FailWithMessage("Update failed"+err.Error(), c)
 	} else {
-		response.OkWithDetailed(response.SysAuthorityResponse{Authority: authority}, "更新成功", c)
+		response.OkWithDetailed(response.SysAuthorityResponse{Authority: authority}, "Update completed", c)
 	}
 }
 
@@ -123,15 +124,15 @@ func GetAuthorityList(c *gin.Context) {
 		return
 	}
 	if err, list, total := service.GetAuthorityInfoList(pageInfo); err != nil {
-		global.GVA_LOG.Error("获取失败!", zap.Any("err", err))
-		response.FailWithMessage("获取失败"+err.Error(), c)
+		global.GVA_LOG.Error("Acquisition failure!", zap.Any("err", err))
+		response.FailWithMessage("Acquisition failure"+err.Error(), c)
 	} else {
 		response.OkWithDetailed(response.PageResult{
 			List:     list,
 			Total:    total,
 			Page:     pageInfo.Page,
 			PageSize: pageInfo.PageSize,
-		}, "获取成功", c)
+		}, "Get successful", c)
 	}
 }
 
@@ -151,9 +152,9 @@ func SetDataAuthority(c *gin.Context) {
 		return
 	}
 	if err := service.SetDataAuthority(auth); err != nil {
-		global.GVA_LOG.Error("设置失败!", zap.Any("err", err))
-		response.FailWithMessage("设置失败"+err.Error(), c)
+		global.GVA_LOG.Error("Setup failed!", zap.Any("err", err))
+		response.FailWithMessage("Setup failed"+err.Error(), c)
 	} else {
-		response.OkWithMessage("设置成功", c)
+		response.OkWithMessage("Set success", c)
 	}
 }

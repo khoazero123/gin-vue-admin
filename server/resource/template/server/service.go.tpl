@@ -7,8 +7,8 @@ import (
 )
 
 //@author: [piexlmax](https://github.com/piexlmax)
-//@function: Create{{.StructName}}
-//@description: 创建{{.StructName}}记录
+//@function: Create {{.StructName}}
+//@description: Create {{.StructName}} recording
 //@param: {{.Abbreviation}} model.{{.StructName}}
 //@return: err error
 
@@ -19,7 +19,7 @@ func Create{{.StructName}}({{.Abbreviation}} model.{{.StructName}}) (err error) 
 
 //@author: [piexlmax](https://github.com/piexlmax)
 //@function: Delete{{.StructName}}
-//@description: 删除{{.StructName}}记录
+//@description: Delete {{.StructName}} recording
 //@param: {{.Abbreviation}} model.{{.StructName}}
 //@return: err error
 
@@ -29,8 +29,8 @@ func Delete{{.StructName}}({{.Abbreviation}} model.{{.StructName}}) (err error) 
 }
 
 //@author: [piexlmax](https://github.com/piexlmax)
-//@function: Delete{{.StructName}}ByIds
-//@description: 批量删除{{.StructName}}记录
+//@function: Delete {{.StructName}} ByIds
+//@description: Batch deletion{{.StructName}} recording
 //@param: ids request.IdsReq
 //@return: err error
 
@@ -41,7 +41,7 @@ func Delete{{.StructName}}ByIds(ids request.IdsReq) (err error) {
 
 //@author: [piexlmax](https://github.com/piexlmax)
 //@function: Update{{.StructName}}
-//@description: 更新{{.StructName}}记录
+//@description: Update {{.StructName}} recording
 //@param: {{.Abbreviation}} *model.{{.StructName}}
 //@return: err error
 
@@ -52,7 +52,7 @@ func Update{{.StructName}}({{.Abbreviation}} model.{{.StructName}}) (err error) 
 
 //@author: [piexlmax](https://github.com/piexlmax)
 //@function: Get{{.StructName}}
-//@description: 根据id获取{{.StructName}}记录
+//@description: Acquisition according to ID {{.StructName}} recording
 //@param: id uint
 //@return: err error, {{.Abbreviation}} model.{{.StructName}}
 
@@ -63,17 +63,17 @@ func Get{{.StructName}}(id uint) (err error, {{.Abbreviation}} model.{{.StructNa
 
 //@author: [piexlmax](https://github.com/piexlmax)
 //@function: Get{{.StructName}}InfoList
-//@description: 分页获取{{.StructName}}记录
+//@description: Page acquisition {{.StructName}} recording
 //@param: info request.{{.StructName}}Search
 //@return: err error, list interface{}, total int64
 
 func Get{{.StructName}}InfoList(info request.{{.StructName}}Search) (err error, list interface{}, total int64) {
 	limit := info.PageSize
 	offset := info.PageSize * (info.Page - 1)
-    // 创建db
+    // Create DB
 	db := global.GVA_DB.Model(&model.{{.StructName}}{})
     var {{.Abbreviation}}s []model.{{.StructName}}
-    // 如果有条件搜索 下方会自动创建搜索语句
+    // If you have conditional search, you will automatically create a search statement.
         {{- range .Fields}}
             {{- if .FieldSearchType}}
                 {{- if eq .FieldType "string" }}

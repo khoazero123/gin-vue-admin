@@ -44,7 +44,7 @@ func CreateExaCustomer(c *gin.Context) {
 // @accept application/json
 // @Produce application/json
 // @Param data body model.ExaCustomer true "客户ID"
-// @Success 200 {string} string "{"success":true,"data":{},"msg":"删除成功"}"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"Successfully deleted"}"
 // @Router /customer/customer [delete]
 func DeleteExaCustomer(c *gin.Context) {
 	var customer model.ExaCustomer

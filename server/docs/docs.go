@@ -936,7 +936,7 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "{\"success\":true,\"data\":{},\"msg\":\"删除成功\"}",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"Successfully deleted\"}",
                         "schema": {
                             "type": "string"
                         }
@@ -1197,7 +1197,7 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "{\"success\":true,\"data\":{},\"msg\":\"删除成功\"}",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"Successfully deleted\"}",
                         "schema": {
                             "type": "string"
                         }
@@ -1571,7 +1571,7 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "{\"success\":true,\"data\":{},\"msg\":\"删除成功\"}",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"Successfully deleted\"}",
                         "schema": {
                             "type": "string"
                         }
@@ -1933,7 +1933,7 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "{\"success\":true,\"data\":{},\"msg\":\"删除成功\"}",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"Successfully deleted\"}",
                         "schema": {
                             "type": "string"
                         }
@@ -2123,7 +2123,7 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "{\"success\":true,\"data\":{},\"msg\":\"删除成功\"}",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"Successfully deleted\"}",
                         "schema": {
                             "type": "string"
                         }
@@ -2313,7 +2313,7 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "{\"success\":true,\"data\":{},\"msg\":\"删除成功\"}",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"Successfully deleted\"}",
                         "schema": {
                             "type": "string"
                         }
@@ -2607,7 +2607,7 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "{\"success\":true,\"data\":{},\"msg\":\"删除成功\"}",
+                        "description": "{\"success\":true,\"data\":{},\"msg\":\"Successfully deleted\"}",
                         "schema": {
                             "type": "string"
                         }

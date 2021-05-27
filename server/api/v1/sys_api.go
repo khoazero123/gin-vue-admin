@@ -28,10 +28,10 @@ func CreateApi(c *gin.Context) {
 		return
 	}
 	if err := service.CreateApi(api); err != nil {
-		global.GVA_LOG.Error("创建失败!", zap.Any("err", err))
-		response.FailWithMessage("创建失败", c)
+		global.GVA_LOG.Error("Creation failed!", zap.Any("err", err))
+		response.FailWithMessage("Creation failed", c)
 	} else {
-		response.OkWithMessage("创建成功", c)
+		response.OkWithMessage("Create success", c)
 	}
 }
 
@@ -41,7 +41,7 @@ func CreateApi(c *gin.Context) {
 // @accept application/json
 // @Produce application/json
 // @Param data body model.SysApi true "ID"
-// @Success 200 {string} string "{"success":true,"data":{},"msg":"删除成功"}"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"Successfully deleted"}"
 // @Router /api/deleteApi [post]
 func DeleteApi(c *gin.Context) {
 	var api model.SysApi
@@ -51,10 +51,10 @@ func DeleteApi(c *gin.Context) {
 		return
 	}
 	if err := service.DeleteApi(api); err != nil {
-		global.GVA_LOG.Error("删除失败!", zap.Any("err", err))
-		response.FailWithMessage("删除失败", c)
+		global.GVA_LOG.Error("Failed to delete!", zap.Any("err", err))
+		response.FailWithMessage("Failed to delete", c)
 	} else {
-		response.OkWithMessage("删除成功", c)
+		response.OkWithMessage("Successfully deleted", c)
 	}
 }
 
@@ -74,15 +74,15 @@ func GetApiList(c *gin.Context) {
 		return
 	}
 	if err, list, total := service.GetAPIInfoList(pageInfo.SysApi, pageInfo.PageInfo, pageInfo.OrderKey, pageInfo.Desc); err != nil {
-		global.GVA_LOG.Error("获取失败!", zap.Any("err", err))
-		response.FailWithMessage("获取失败", c)
+		global.GVA_LOG.Error("Acquisition failure!", zap.Any("err", err))
+		response.FailWithMessage("Acquisition failure", c)
 	} else {
 		response.OkWithDetailed(response.PageResult{
 			List:     list,
 			Total:    total,
 			Page:     pageInfo.Page,
 			PageSize: pageInfo.PageSize,
-		}, "获取成功", c)
+		}, "Get successful", c)
 	}
 }
 
@@ -103,8 +103,8 @@ func GetApiById(c *gin.Context) {
 	}
 	err, api := service.GetApiById(idInfo.ID)
 	if err != nil {
-		global.GVA_LOG.Error("获取失败!", zap.Any("err", err))
-		response.FailWithMessage("获取失败", c)
+		global.GVA_LOG.Error("Acquisition failure!", zap.Any("err", err))
+		response.FailWithMessage("Acquisition failure", c)
 	} else {
 		response.OkWithData(response.SysAPIResponse{Api: api}, c)
 	}
@@ -126,10 +126,10 @@ func UpdateApi(c *gin.Context) {
 		return
 	}
 	if err := service.UpdateApi(api); err != nil {
-		global.GVA_LOG.Error("修改失败!", zap.Any("err", err))
-		response.FailWithMessage("修改失败", c)
+		global.GVA_LOG.Error("Fail to edit!", zap.Any("err", err))
+		response.FailWithMessage("Fail to edit", c)
 	} else {
-		response.OkWithMessage("修改成功", c)
+		response.OkWithMessage("Successfully modified", c)
 	}
 }
 
@@ -142,10 +142,10 @@ func UpdateApi(c *gin.Context) {
 // @Router /api/getAllApis [post]
 func GetAllApis(c *gin.Context) {
 	if err, apis := service.GetAllApis(); err != nil {
-		global.GVA_LOG.Error("获取失败!", zap.Any("err", err))
-		response.FailWithMessage("获取失败", c)
+		global.GVA_LOG.Error("Acquisition failure!", zap.Any("err", err))
+		response.FailWithMessage("Acquisition failure", c)
 	} else {
-		response.OkWithDetailed(response.SysAPIListResponse{Apis: apis}, "获取成功", c)
+		response.OkWithDetailed(response.SysAPIListResponse{Apis: apis}, "Get successful", c)
 	}
 }
 
@@ -155,15 +155,15 @@ func GetAllApis(c *gin.Context) {
 // @accept application/json
 // @Produce application/json
 // @Param data body request.IdsReq true "ID"
-// @Success 200 {string} string "{"success":true,"data":{},"msg":"删除成功"}"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"Successfully deleted"}"
 // @Router /api/deleteApisByIds [delete]
 func DeleteApisByIds(c *gin.Context) {
 	var ids request.IdsReq
 	_ = c.ShouldBindJSON(&ids)
 	if err := service.DeleteApisByIds(ids); err != nil {
-		global.GVA_LOG.Error("删除失败!", zap.Any("err", err))
-		response.FailWithMessage("删除失败", c)
+		global.GVA_LOG.Error("Failed to delete!", zap.Any("err", err))
+		response.FailWithMessage("Failed to delete", c)
 	} else {
-		response.OkWithMessage("删除成功", c)
+		response.OkWithMessage("Successfully deleted", c)
 	}
 }

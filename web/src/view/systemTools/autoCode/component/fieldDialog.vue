@@ -16,7 +16,7 @@
           <el-button @click="autoFill">Automatic filling</el-button>
         </el-col>
       </el-form-item>
-      <el-form-item label="Field Chinese name" prop="fieldDesc">
+      <el-form-item label="Field description" prop="fieldDesc">
         <el-col :span="6">
           <el-input v-model="dialogMiddle.fieldDesc" autocomplete="off"></el-input>
         </el-col>
@@ -168,10 +168,10 @@ export default {
       ],
       rules: {
         fieldName: [
-          { required: true, message: "Please enter the Field English name", trigger: "blur" }
+          { required: true, message: "Please enter the Field name", trigger: "blur" }
         ],
         fieldDesc: [
-          { required: true, message: "Please enter the Field Chinese name", trigger: "blur" }
+          { required: true, message: "Please enter the Field Description", trigger: "blur" }
         ],
         fieldJson: [
           { required: true, message: "Please enter Field format JSON", trigger: "blur" }

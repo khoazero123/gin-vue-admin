@@ -123,7 +123,7 @@ export const deleteApi = (data) => {
 // @accept application/json
 // @Produce application/json
 // @Param data body request.IdsReq true "ID"
-// @Success 200 {string} string "{"success":true,"data":{},"msg":"删除成功"}"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"Successfully deleted"}"
 // @Router /api/deleteApisByIds [delete]
 export const deleteApisByIds = (data) => {
     return service({

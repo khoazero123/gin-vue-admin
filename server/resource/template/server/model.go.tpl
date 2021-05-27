@@ -1,11 +1,11 @@
-// 自动生成模板{{.StructName}}
+// Automatic generation template {{.StructName}}
 package model
 
 import (
 	"gin-vue-admin/global"
 )
 
-// 如果含有time.Time 请自行import time包
+// If you contain time.Time, please ask your own Import Time package.
 type {{.StructName}} struct {
       global.GVA_MODEL {{- range .Fields}}
             {{- if eq .FieldType "bool" }}

@@ -1,4 +1,4 @@
-// 自动生成模板SysDictionaryDetail
+// Automatic generation template SysDictionaryDetail
 package model
 
 import (
