@@ -4,10 +4,10 @@
         {{- range .Fields}}
              <el-form-item label="{{.FieldDesc}}:">
           {{- if eq .FieldType "bool" }}
-                <el-switch active-color="#13ce66" inactive-color="#ff4949" active-text="是" inactive-text="否" v-model="formData.{{.FieldJson}}" clearable ></el-switch>
+                <el-switch active-color="#13ce66" inactive-color="#ff4949" active-text="Yes" inactive-text="no" v-model="formData.{{.FieldJson}}" clearable ></el-switch>
           {{ end -}}
           {{- if eq .FieldType "string" }}
-                <el-input v-model="formData.{{.FieldJson}}" clearable placeholder="请输入" ></el-input>
+                <el-input v-model="formData.{{.FieldJson}}" clearable placeholder="please enter" ></el-input>
           {{ end -}}
           {{- if eq .FieldType "int" }}
           {{- if .DictType}}
@@ -15,11 +15,11 @@
                      <el-option v-for="(item,key) in {{ .DictType }}Options" :key="key" :label="item.label" :value="item.value"></el-option>
                  </el-select>
           {{ else -}}
-                 <el-input v-model.number="formData.{{ .FieldJson }}" clearable placeholder="请输入"></el-input>
+                 <el-input v-model.number="formData.{{ .FieldJson }}" clearable placeholder="please enter"></el-input>
           {{ end -}}
           {{ end -}}
           {{- if eq .FieldType "time.Time" }}
-                  <el-date-picker type="date" placeholder="选择日期" v-model="formData.{{ .FieldJson }}" clearable></el-date-picker>
+                  <el-date-picker type="date" placeholder="Dates" v-model="formData.{{ .FieldJson }}" clearable></el-date-picker>
            {{ end -}}
            {{- if eq .FieldType "float64" }}
                   <el-input-number v-model="formData.{{ .FieldJson }}" :precision="2" clearable></el-input-number>
@@ -28,8 +28,8 @@
            {{ end -}}
 
            <el-form-item>
-           <el-button @click="save" type="primary">保存</el-button>
-           <el-button @click="back" type="primary">返回</el-button>
+           <el-button @click="save" type="primary">Preservation</el-button>
+           <el-button @click="back" type="primary">return</el-button>
            </el-form-item>
     </el-form>
 </div>

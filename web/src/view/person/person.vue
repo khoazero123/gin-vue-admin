@@ -7,11 +7,11 @@
               <div class="user-headpic-update" :style="{ 'background-image': `url(${(userInfo.headerImg && userInfo.headerImg.slice(0, 4) !== 'http')?path+userInfo.headerImg:userInfo.headerImg})`,'background-repeat':'no-repeat','background-size':'cover' }" >
               <span class="update" @click="openChooseImg">
                 <i class="el-icon-edit"></i>
-                重新上传</span>
+                re-upload</span>
               </div>
             <div class="user-personality">
               <p class="nickname">{{userInfo.nickName}}</p>
-              <p class="person-info">这个家伙很懒，什么都没有留下</p>
+              <p class="person-info">This guy is too lazy, nothing left</p>
             </div>
             <div class="user-information">
               <ul>
@@ -19,10 +19,10 @@
                    <i class="el-icon-user"></i>{{userInfo.nickName}}
                 </li>
                 <li>
-                  <i class="el-icon-data-analysis"></i>北京反转极光科技有限公司-技术部-前端事业群
+                  <i class="el-icon-data-analysis"></i>Beijing Inverse Aurora Technology Co., Ltd. - Technical Department - Front End Business Group
                 </li>
                 <li>
-                  <i class="el-icon-video-camera-solid"></i>中国·北京市·朝阳区
+                  <i class="el-icon-video-camera-solid"></i>China · Beijing Chaoyang District
                 </li>
                 <li>
                   <i class="el-icon-medal-1"></i>goLang/JavaScript/Vue/Gorm
@@ -38,31 +38,31 @@
             <el-tab-pane label="账号绑定" name="second">
               <ul>
                 <li>
-                  <p class="title">密保手机</p>
+                  <p class="title">Secret mobile phone</p>
                   <p class="desc">
-                    已绑定手机:1245678910
-                    <a href="#">立即修改</a>
+                    Bind mobile phone:1245678910
+                    <a href="#">Immediate modification</a>
                   </p>
                 </li>
                 <li>
-                  <p class="title">密保邮箱</p>
+                  <p class="title">Secret mailbox</p>
                   <p class="desc">
-                    已绑定邮箱：gin-vue-admin@google.com.cn
-                    <a href="#">立即修改</a>
+                    Binding mailbox：gin-vue-admin@google.com.cn
+                    <a href="#">Immediate modification</a>
                   </p>
                 </li>
                 <li>
-                  <p class="title">密保问题</p>
+                  <p class="title">Security Question</p>
                   <p class="desc">
-                    未设置密保问题
-                    <a href="#">去设置</a>
+                    No security issues are set
+                    <a href="#">Set</a>
                   </p>
                 </li>
                 <li>
-                  <p class="title">修改密码</p>
+                  <p class="title">change Password</p>
                   <p class="desc">
-                    修改个人密码
-                    <a href="#" @click="showPassword=true">修改密码</a>
+                    Modify personal password
+                    <a href="#" @click="showPassword=true">change Password</a>
                   </p>
                 </li>
               </ul>
@@ -74,21 +74,21 @@
 
     <ChooseImg ref="chooseImg" @enter-img="enterImg" />
 
-    <el-dialog :visible.sync="showPassword" @close="clearPassword" title="修改密码" width="360px">
+    <el-dialog :visible.sync="showPassword" @close="clearPassword" title="change Password" width="360px">
       <el-form :model="pwdModify" :rules="rules" label-width="80px" ref="modifyPwdForm">
-        <el-form-item :minlength="6" label="原密码" prop="password">
+        <el-form-item :minlength="6" label="old password" prop="password">
           <el-input show-password v-model="pwdModify.password"></el-input>
         </el-form-item>
-        <el-form-item :minlength="6" label="新密码" prop="newPassword">
+        <el-form-item :minlength="6" label="new password" prop="newPassword">
           <el-input show-password v-model="pwdModify.newPassword"></el-input>
         </el-form-item>
-        <el-form-item :minlength="6" label="确认密码" prop="confirmPassword">
+        <el-form-item :minlength="6" label="confirm password" prop="confirmPassword">
           <el-input show-password v-model="pwdModify.confirmPassword"></el-input>
         </el-form-item>
       </el-form>
       <div class="dialog-footer" slot="footer">
-        <el-button @click="showPassword=false">取 消</el-button>
-        <el-button @click="savePassword" type="primary">确 定</el-button>
+        <el-button @click="showPassword=false">Take</el-button>
+        <el-button @click="savePassword" type="primary">Confirm</el-button>
       </div>
     </el-dialog>
   </div>
@@ -109,20 +109,20 @@ export default {
       pwdModify: {},
       rules: {
         password: [
-          { required: true, message: "请输入密码", trigger: "blur" },
-          { min: 6, message: "最少6个字符", trigger: "blur" }
+          { required: true, message: "Please enter your password", trigger: "blur" },
+          { min: 6, message: "At least 6 characters", trigger: "blur" }
         ],
         newPassword: [
-          { required: true, message: "请输入新密码", trigger: "blur" },
-          { min: 6, message: "最少6个字符", trigger: "blur" }
+          { required: true, message: "Please enter a new password", trigger: "blur" },
+          { min: 6, message: "At least 6 characters", trigger: "blur" }
         ],
         confirmPassword: [
-          { required: true, message: "请输入确认密码", trigger: "blur" },
-          { min: 6, message: "最少6个字符", trigger: "blur" },
+          { required: true, message: "Please enter a confirmation password", trigger: "blur" },
+          { min: 6, message: "At least 6 characters", trigger: "blur" },
           {
             validator: (rule, value, callback) => {
               if (value !== this.pwdModify.newPassword) {
-                callback(new Error("两次密码不一致"));
+                callback(new Error("Two passwords are inconsistent"));
               } else {
                 callback();
               }
@@ -150,7 +150,7 @@ export default {
             newPassword: this.pwdModify.newPassword
           }).then((res) => {
             if(res.code == 0){
-              this.$message.success("修改密码成功！");
+              this.$message.success("successfully change password!");
             }
             this.showPassword = false;
           });
@@ -176,7 +176,7 @@ export default {
         this.ResetUserInfo({ headerImg: url });
         this.$message({
           type: "success",
-          message: "设置成功"
+          message: "Set success"
         });
       }
     },

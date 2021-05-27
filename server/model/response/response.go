@@ -1,8 +1,9 @@
 package response
 
 import (
-	"github.com/gin-gonic/gin"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
 )
 
 type Response struct {
@@ -17,7 +18,7 @@ const (
 )
 
 func Result(code int, data interface{}, msg string, c *gin.Context) {
-	// 开始时间
+	// Starting time
 	c.JSON(http.StatusOK, Response{
 		code,
 		data,
@@ -26,7 +27,7 @@ func Result(code int, data interface{}, msg string, c *gin.Context) {
 }
 
 func Ok(c *gin.Context) {
-	Result(SUCCESS, map[string]interface{}{}, "操作成功", c)
+	Result(SUCCESS, map[string]interface{}{}, "Successful operation", c)
 }
 
 func OkWithMessage(message string, c *gin.Context) {
@@ -34,7 +35,7 @@ func OkWithMessage(message string, c *gin.Context) {
 }
 
 func OkWithData(data interface{}, c *gin.Context) {
-	Result(SUCCESS, data, "操作成功", c)
+	Result(SUCCESS, data, "Successful operation", c)
 }
 
 func OkWithDetailed(data interface{}, message string, c *gin.Context) {
@@ -42,7 +43,7 @@ func OkWithDetailed(data interface{}, message string, c *gin.Context) {
 }
 
 func Fail(c *gin.Context) {
-	Result(ERROR, map[string]interface{}{}, "操作失败", c)
+	Result(ERROR, map[string]interface{}{}, "Operation failed", c)
 }
 
 func FailWithMessage(message string, c *gin.Context) {

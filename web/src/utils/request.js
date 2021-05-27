@@ -69,7 +69,7 @@ service.interceptors.response.use(
             if(response.data.data?.needInit){
                 Message({
                     type:"info",
-                    message:"您是第一次使用，请初始化"
+                    message:"You are the first time, please initialize"
                 })
                     store.commit("user/NeedInit")
                     router.push({name:"init"})
