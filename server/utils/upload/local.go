@@ -4,13 +4,14 @@ import (
 	"errors"
 	"gin-vue-admin/global"
 	"gin-vue-admin/utils"
-	"go.uber.org/zap"
 	"io"
 	"mime/multipart"
 	"os"
 	"path"
 	"strings"
 	"time"
+
+	"go.uber.org/zap"
 )
 
 type Local struct{}
@@ -77,7 +78,7 @@ func (*Local) DeleteFile(key string) error {
 	p := global.GVA_CONFIG.Local.Path + "/" + key
 	if strings.Contains(p, global.GVA_CONFIG.Local.Path) {
 		if err := os.Remove(p); err != nil {
-			return errors.New("本地文件删除失败, err:" + err.Error())
+			return errors.New("Local file deletion failed, err:" + err.Error())
 		}
 	}
 	return nil

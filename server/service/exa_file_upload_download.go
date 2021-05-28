@@ -43,7 +43,7 @@ func DeleteFile(file model.ExaFileUploadAndDownload) (err error) {
 	err, fileFromDb = FindFile(file.ID)
 	oss := upload.NewOss()
 	if err = oss.DeleteFile(fileFromDb.Key); err != nil {
-		return errors.New("文件删除失败")
+		return errors.New("File deletion failed")
 	}
 	err = global.GVA_DB.Where("id = ?", file.ID).Unscoped().Delete(&file).Error
 	return err
