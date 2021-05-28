@@ -1,7 +1,7 @@
 #! /bin/bash
 
 rm -f ./config.yaml
-# 生成config.yaml文件, 用于docker-compose的使用
+# Generate config.yaml files for use in Docker-Compose
 touch ./config.yaml
 filename="./config.yaml"
 cat>"${filename}"<<EOF
@@ -75,7 +75,7 @@ mysql:
 local:
   path: 'uploads/file'
 
-# qiniu configuration (请自行七牛申请对应的 公钥 私钥 bucket 和 域名地址)
+# qiniu configuration (Please request a corresponding public key private key bucket and domain name address)
 qiniu:
   zone: 'ZoneHuadong'
   bucket: 'qm-plus-img'

@@ -7,11 +7,12 @@ import (
 	"gin-vue-admin/model/request"
 	"gin-vue-admin/model/response"
 	"gin-vue-admin/service"
+	"strconv"
+	"time"
+
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
-	"strconv"
-	"time"
 )
 
 func JWTAuth() gin.HandlerFunc {
@@ -19,12 +20,12 @@ func JWTAuth() gin.HandlerFunc {
 		// 我们这里jwt鉴权取头部信息 x-token 登录时回返回token信息 这里前端需要把token存储到cookie或者本地localStorage中 不过需要跟后端协商过期时间 可以约定刷新令牌或者重新登录
 		token := c.Request.Header.Get("x-token")
 		if token == "" {
-			response.FailWithDetailed(gin.H{"reload": true}, "未登录或非法访问", c)
+			response.FailWithDetailed(gin.H{"reload": true}, "Not logged or illegally access", c)
 			c.Abort()
 			return
 		}
 		if service.IsBlacklist(token) {
-			response.FailWithDetailed(gin.H{"reload": true}, "您的帐户异地登陆或令牌失效", c)
+			response.FailWithDetailed(gin.H{"reload": true}, "Your account is logged in differently or token invalid", c)
 			c.Abort()
 			return
 		}
@@ -33,7 +34,7 @@ func JWTAuth() gin.HandlerFunc {
 		claims, err := j.ParseToken(token)
 		if err != nil {
 			if err == TokenExpired {
-				response.FailWithDetailed(gin.H{"reload": true}, "授权已过期", c)
+				response.FailWithDetailed(gin.H{"reload": true}, "Authorization has expired", c)
 				c.Abort()
 				return
 			}
@@ -56,10 +57,10 @@ func JWTAuth() gin.HandlerFunc {
 				err, RedisJwtToken := service.GetRedisJWT(newClaims.Username)
 				if err != nil {
 					global.GVA_LOG.Error("get redis jwt failed", zap.Any("err", err))
-				} else { // 当之前的取成功时才进行拉黑操作
+				} else { // When the previous success is successful, blackout is performed.
 					_ = service.JsonInBlacklist(model.JwtBlacklist{Jwt: RedisJwtToken})
 				}
-				// 无论如何都要记录当前的活跃状态
+				// Record the current active status anyway
 				_ = service.SetRedisJWT(newToken, newClaims.Username)
 			}
 		}

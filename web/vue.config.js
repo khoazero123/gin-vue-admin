@@ -8,7 +8,7 @@ function resolve(dir) {
     return path.join(__dirname, dir)
 }
 module.exports = {
-    // 基础配置 详情看文档
+    // Basic configuration details
     publicPath: './',
     outputDir: 'dist',
     assetsDir: 'static',
@@ -22,19 +22,19 @@ module.exports = {
             errors: true
         },
         proxy: {
-            // 把key的路径代理到target位置
+            // Proxy of Key's path to Target location
             // detail: https://cli.vuejs.org/config/#devserver-proxy
-            [process.env.VUE_APP_BASE_API]: { //需要代理的路径   例如 '/api'
-                target: `${process.env.VUE_APP_BASE_PATH}:${process.env.VUE_APP_SERVER_PORT}/`, //代理到 目标路径
+            [process.env.VUE_APP_BASE_API]: { //Need a proxy path   E.g '/api'
+                target: `${process.env.VUE_APP_BASE_PATH}:${process.env.VUE_APP_SERVER_PORT}/`, //Agent to the target path
                 changeOrigin: true,
-                pathRewrite: { // 修改路径数据
-                    ['^' + process.env.VUE_APP_BASE_API]: '' // 举例 '^/api:""' 把路径中的/api字符串删除
+                pathRewrite: { // Modify path data
+                    ['^' + process.env.VUE_APP_BASE_API]: '' // Example '^/api:""' Remove / API string in the path
                 }
             }
         },
     },
     configureWebpack: {
-        //    @路径走src文件夹
+        //    @Path walks src folder
         resolve: {
             alias: {
                 '@': resolve('src')
@@ -62,14 +62,14 @@ module.exports = {
             .when(process.env.NODE_ENV !== 'development',
                 config => {
 
-                    // 不打包 begin
-                    // 1.目前已经测试通过[vue,axios,echarts]可以cdn引用，其它组件测试通过后可继续添加
-                    // 2.此处添加不打包后，需在public/index.html head中添加相应cdn资源链接
+                    // Not packaged begin
+                    // 1.Currently tested [vue,axios,echarts]Can cdn reference， Other component tests can continue to add
+                    // 2.After adding not packaged, you need to public/index.html head Add corresponding CDN resource links
                     config.set('externals', buildConf.cdns.reduce((p, a) => {
                         p[a.name] = a.scope 
                         return p
                     },{}))
-                    // 不打包 end
+                    // Not packaged end
 
                     config.plugin('html')
                         .tap(args => {
